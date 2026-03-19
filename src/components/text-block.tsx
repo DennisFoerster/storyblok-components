@@ -69,15 +69,27 @@ function resolveHeadlineSize(value: StoryblokSingleOptionField) {
   switch (size) {
     case "small":
     case "klein":
-      return "text-[2.1rem] md:text-[2.5rem]";
+      return {
+        fontSize: "clamp(2.1rem, 4vw, 2.5rem)",
+        lineHeight: 0.96,
+      };
     case "large":
     case "gross":
     case "groß":
-      return "text-[3rem] md:text-[3.6rem]";
+      return {
+        fontSize: "clamp(3rem, 5vw, 3.6rem)",
+        lineHeight: 0.94,
+      };
     case "xl":
-      return "text-[3.5rem] md:text-[4.2rem]";
+      return {
+        fontSize: "clamp(3.5rem, 6vw, 4.2rem)",
+        lineHeight: 0.92,
+      };
     default:
-      return "text-[2.5rem] md:text-[3rem]";
+      return {
+        fontSize: "clamp(2.5rem, 4.5vw, 3rem)",
+        lineHeight: 0.96,
+      };
   }
 }
 
@@ -87,13 +99,22 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
   switch (size) {
     case "small":
     case "klein":
-      return "text-[1rem] leading-8";
+      return {
+        fontSize: "1rem",
+        lineHeight: 1.8,
+      };
     case "large":
     case "gross":
     case "groß":
-      return "text-[1.2rem] leading-9";
+      return {
+        fontSize: "1.2rem",
+        lineHeight: 1.95,
+      };
     default:
-      return "text-[1.08rem] leading-8";
+      return {
+        fontSize: "1.08rem",
+        lineHeight: 1.85,
+      };
   }
 }
 
@@ -102,6 +123,8 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
   const textColor = resolveColor(blok.text_color, "rgba(41,71,61,0.78)");
   const headlineAlign = resolveAlignClass(blok.headline_align);
   const textAlign = resolveAlignClass(blok.text_align);
+  const headlineSizeStyles = resolveHeadlineSize(blok.headline_size);
+  const textSizeStyles = resolveTextSize(blok.text_size);
 
   return (
     <section
@@ -111,12 +134,15 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
       {blok.headline ? (
         <h2
           className={[
-            "font-display leading-[0.96] tracking-[-0.03em]",
-            resolveHeadlineSize(blok.headline_size),
+            "font-display tracking-[-0.03em]",
             blok.headline_bold ? "font-bold" : "font-semibold",
             headlineAlign,
           ].join(" ")}
-          style={{ color: headlineColor }}
+          style={{
+            color: headlineColor,
+            fontSize: headlineSizeStyles.fontSize,
+            lineHeight: headlineSizeStyles.lineHeight,
+          }}
         >
           {blok.headline}
         </h2>
@@ -125,10 +151,13 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
       <div
         className={[
           "mt-5 whitespace-pre-line",
-          resolveTextSize(blok.text_size),
           textAlign,
         ].join(" ")}
-        style={{ color: textColor }}
+        style={{
+          color: textColor,
+          fontSize: textSizeStyles.fontSize,
+          lineHeight: textSizeStyles.lineHeight,
+        }}
       >
         {blok.text || "Bitte Text in Storyblok eintragen."}
       </div>
