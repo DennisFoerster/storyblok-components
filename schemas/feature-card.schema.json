@@ -1,0 +1,9 @@
+{
+  "component": "feature_card",
+  "display_name": "Feature Card",
+  "fields": [
+    { "name": "headline", "type": "text" },
+    { "name": "text", "type": "textarea" },
+    { "name": "icon", "type": "asset" }
+  ]
+}

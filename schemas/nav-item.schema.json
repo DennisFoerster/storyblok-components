@@ -1,0 +1,8 @@
+{
+  "component": "nav_item",
+  "display_name": "Nav Item",
+  "fields": [
+    { "name": "label", "type": "text" },
+    { "name": "link", "type": "link" }
+  ]
+}

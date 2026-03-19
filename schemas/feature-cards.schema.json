@@ -1,0 +1,8 @@
+{
+  "component": "feature_cards",
+  "display_name": "Feature Cards",
+  "fields": [
+    { "name": "background_color", "type": "color" },
+    { "name": "items", "type": "blocks", "restrict_components": ["feature_card"] }
+  ]
+}

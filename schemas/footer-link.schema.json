@@ -1,0 +1,8 @@
+{
+  "component": "footer_link",
+  "display_name": "Footer Link",
+  "fields": [
+    { "name": "label", "type": "text" },
+    { "name": "link", "type": "link" }
+  ]
+}

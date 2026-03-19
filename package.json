@@ -1,0 +1,52 @@
+{
+  "name": "@dennisfoerster/storyblok-sections",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reusable Storyblok sections and helpers for Next.js projects.",
+  "keywords": [
+    "storyblok",
+    "nextjs",
+    "react",
+    "cms",
+    "components"
+  ],
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src/styles.css",
+    "docs",
+    "schemas"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@storyblok/react": "^6.1.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "@storyblok/react": "^6.1.0",
+    "next": "^16.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./register": "./dist/register-storyblok-sections.js",
+    "./styles.css": "./src/styles.css",
+    "./docs/navigation": "./docs/navigation.md",
+    "./docs/footer": "./docs/footer.md",
+    "./docs/hero": "./docs/hero.md",
+    "./docs/feature-cards": "./docs/feature-cards.md"
+  }
+}

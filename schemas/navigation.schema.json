@@ -1,0 +1,13 @@
+{
+  "component": "navigation",
+  "display_name": "Navigation",
+  "fields": [
+    { "name": "logo", "type": "asset" },
+    { "name": "logo_label", "type": "text" },
+    { "name": "logo_link", "type": "link" },
+    { "name": "logo_width", "type": "number" },
+    { "name": "items", "type": "blocks", "restrict_components": ["nav_item"] },
+    { "name": "cta_label", "type": "text" },
+    { "name": "cta_link", "type": "link" }
+  ]
+}

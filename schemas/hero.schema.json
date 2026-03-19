@@ -1,0 +1,25 @@
+{
+  "component": "hero",
+  "display_name": "Hero",
+  "fields": [
+    { "name": "eyebrow", "type": "text" },
+    { "name": "headline", "type": "text" },
+    { "name": "text", "type": "textarea" },
+    { "name": "image", "type": "asset" },
+    { "name": "background_color", "type": "color" },
+    { "name": "accent_color", "type": "color" },
+    { "name": "headline_color", "type": "color" },
+    { "name": "text_color", "type": "color" },
+    { "name": "cta_label", "type": "text" },
+    { "name": "cta_link", "type": "link" },
+    { "name": "cta_background_color", "type": "color" },
+    { "name": "cta_text_color", "type": "color" },
+    { "name": "headline_size", "type": "single_option" },
+    { "name": "text_size", "type": "single_option" },
+    { "name": "image_animation", "type": "single_option" },
+    { "name": "image_animation_direction", "type": "single_option" },
+    { "name": "image_animation_speed", "type": "single_option" },
+    { "name": "image_animation_delay", "type": "number" },
+    { "name": "image_animation_distance", "type": "number" }
+  ]
+}

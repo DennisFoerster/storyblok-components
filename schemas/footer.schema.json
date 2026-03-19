@@ -1,0 +1,8 @@
+{
+  "component": "footer",
+  "display_name": "Footer",
+  "fields": [
+    { "name": "text", "type": "textarea" },
+    { "name": "links", "type": "blocks", "restrict_components": ["footer_link"] }
+  ]
+}
