@@ -1,8 +1,10 @@
 # `@dennisfoerster/storyblok-sections`
 
-Wiederverwendbare Storyblok-Komponenten und Hilfsfunktionen fuer Next.js-Projekte.
+Wiederverwendbare Storyblok-Komponenten und Hilfsfunktionen für Next.js-Projekte.
 
-Der Ordner ist jetzt so vorbereitet, dass du ihn mit wenig Aufwand in ein eigenes Git-Repo verschieben kannst.
+GitHub-Repository:
+
+- `https://github.com/DennisFoerster/storyblok-components`
 
 ## Enthalten
 
@@ -12,34 +14,49 @@ Der Ordner ist jetzt so vorbereitet, dass du ihn mit wenig Aufwand in ein eigene
 - `feature_cards`
 - `feature_card`
 - globales Reveal-Animationssystem
-- `registerStoryblokSections()` fuer die Storyblok-Registrierung
-- Doku und Schema-Dateien fuer Storyblok
+- `registerStoryblokSections()` für die Storyblok-Registrierung
+- Doku und Schema-Referenzen für Storyblok
 
-## Repo-Struktur
-
-```txt
-src/
-  animation/
-  components/
-  lib/
-docs/
-schemas/
-dist/
-```
-
-## Verwendung in einem anderen Next.js-Projekt
-
-### 1. Package installieren
-
-Als Workspace, lokales Paket oder aus einem eigenen Git-Repo:
+## Installation im Projekt
 
 ```bash
-npm install git+ssh://git@github.com/<dein-user>/storyblok-sections.git
+npm install git+https://github.com/DennisFoerster/storyblok-components.git
 ```
 
-### 2. Falls noetig: Package transpilen
+Das Paket enthält ein `prepare`-Script und baut sich bei Git-Installation selbst.
 
-Wenn das Package als Quellcode eingebunden wird:
+## Verwendung in einem Next.js-Projekt
+
+### 1. Styles importieren
+
+Zum Beispiel in `app/layout.tsx`:
+
+```ts
+import "@dennisfoerster/storyblok-sections/styles.css";
+```
+
+### 2. Storyblok-Komponenten registrieren
+
+Zum Beispiel in `lib/storyblok.ts`:
+
+```ts
+import { apiPlugin, storyblokInit } from "@storyblok/react/rsc";
+import { registerStoryblokSections } from "@dennisfoerster/storyblok-sections/register";
+
+export const getStoryblokApi = storyblokInit({
+  accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
+  use: [apiPlugin],
+  components: {
+    ...registerStoryblokSections(),
+    page: Page,
+    text_section: TextSection,
+  },
+});
+```
+
+### 3. Falls nötig: Next-Konfiguration prüfen
+
+In vielen Fällen reicht die Git-Abhängigkeit direkt. Wenn ein Projekt Paketquellcode transpilen muss, kann zusätzlich `transpilePackages` nötig sein:
 
 ```ts
 import type { NextConfig } from "next";
@@ -51,28 +68,13 @@ const nextConfig: NextConfig = {
 export default nextConfig;
 ```
 
-### 3. Styles importieren
+## Aktueller Standard-Ablauf
 
-In deiner globalen CSS- oder Layout-Ebene:
-
-```ts
-import "@dennisfoerster/storyblok-sections/styles.css";
-```
-
-### 4. Storyblok registrieren
-
-```ts
-import { apiPlugin, storyblokInit } from "@storyblok/react/rsc";
-import { registerStoryblokSections } from "@dennisfoerster/storyblok-sections/register";
-
-export const getStoryblokApi = storyblokInit({
-  accessToken: process.env.NEXT_PUBLIC_STORYBLOK_ACCESS_TOKEN,
-  use: [apiPlugin],
-  components: {
-    ...registerStoryblokSections(),
-  },
-});
-```
+1. Paket im Projekt installieren
+2. globale Paket-Styles importieren
+3. Storyblok über `registerStoryblokSections()` registrieren
+4. in Storyblok die passenden Content Types / Blöcke anlegen
+5. Inhalte in Stories befüllen
 
 ## Storyblok-Doku
 
@@ -81,9 +83,9 @@ export const getStoryblokApi = storyblokInit({
 - `docs/hero.md`
 - `docs/feature-cards.md`
 
-## Storyblok-Schemas
+## Storyblok-Schema-Referenzen
 
-Im Ordner `schemas/` liegen einfache Schema-Dateien als Referenz:
+Im Ordner `schemas/` liegen Referenzdateien für die anzulegenden Komponenten:
 
 - `navigation.schema.json`
 - `nav-item.schema.json`
@@ -93,27 +95,19 @@ Im Ordner `schemas/` liegen einfache Schema-Dateien als Referenz:
 - `feature-cards.schema.json`
 - `feature-card.schema.json`
 
-## Lokale Entwicklung
+## Lokale Entwicklung des Pakets
 
 ```bash
 npm install
 npm run build
 ```
 
-## In eigenes Repo verschieben
+## Typischer Workflow bei Änderungen
 
-Empfohlener Ablauf:
+1. Änderungen im Komponenten-Repo machen
+2. ins Repo `storyblok-components` committen und pushen
+3. im Zielprojekt `npm install` erneut ausführen, damit der neue Git-Stand gezogen wird
 
-1. Neues Git-Repo `storyblok-sections` anlegen.
-2. Den kompletten Inhalt dieses Ordners in das neue Repo kopieren.
-3. `private` in `package.json` je nach Ziel anpassen.
-4. Optional Repository-Metadaten, Lizenz und CI ergaenzen.
-5. In Zielprojekten per Git oder Registry installieren.
+## Hinweis
 
-## Vor echtem Veröffentlichen noch sinnvoll
-
-- `private` auf `false` setzen
-- `repository`, `homepage` und `bugs` in `package.json` ergaenzen
-- CI fuer Build/Checks ergaenzen
-- Versionierung und Changelog festlegen
-- optional `navigation`/`footer` visuell weiter entkoppeln
+Die Komponenten nutzen Tailwind-Utilities im konsumierenden Next.js-Projekt. Das Paket ist daher für Projekte gedacht, die bereits mit Tailwind arbeiten.
