@@ -20,8 +20,8 @@
     "url": "https://github.com/DennisFoerster/storyblok-components/issues"
   },
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "files": [
     "dist",
     "src/styles.css",
@@ -50,8 +50,8 @@
     "react-dom": "^19.0.0"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./register": "./dist/register-storyblok-sections.js",
+    ".": "./src/index.ts",
+    "./register": "./src/register-storyblok-sections.ts",
     "./styles.css": "./src/styles.css",
     "./docs/navigation": "./docs/navigation.md",
     "./docs/footer": "./docs/footer.md",
