@@ -11,6 +11,7 @@ GitHub-Repository:
 - `navigation`
 - `footer`
 - `hero`
+- `text_block`
 - `feature_cards`
 - `feature_card`
 - globales Reveal-Animationssystem
@@ -81,6 +82,7 @@ export default nextConfig;
 - `docs/navigation.md`
 - `docs/footer.md`
 - `docs/hero.md`
+- `docs/text-block.md`
 - `docs/feature-cards.md`
 
 ## Storyblok-Schema-Referenzen
@@ -92,6 +94,7 @@ Im Ordner `schemas/` liegen Referenzdateien für die anzulegenden Komponenten:
 - `footer.schema.json`
 - `footer-link.schema.json`
 - `hero.schema.json`
+- `text-block.schema.json`
 - `feature-cards.schema.json`
 - `feature-card.schema.json`
 
