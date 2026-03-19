@@ -41,7 +41,7 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
   return (
     <article
       {...storyblokEditable(blok)}
-      className="flex h-full min-h-[31rem] w-full flex-col rounded-[1.9rem] border border-[rgba(41,71,61,0.1)] px-8 py-8 lg:min-h-[33rem] lg:px-10 lg:py-10 shadow-[0_16px_36px_rgba(41,71,61,0.05)]"
+      className="flex h-full w-full flex-col rounded-[1.9rem] border border-[rgba(41,71,61,0.1)] px-8 py-8 lg:px-10 lg:py-10 shadow-[0_16px_36px_rgba(41,71,61,0.05)]"
       style={{ backgroundColor: "var(--feature-cards-bg, #edf8f5)" }}
     >
       <div className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-[rgba(41,71,61,0.12)] bg-white/55">
@@ -62,7 +62,7 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
         {blok.headline || "Uberschrift"}
       </h3>
 
-      <p className="mt-5 flex-1 whitespace-pre-line text-[1.03rem] leading-8 text-[rgba(41,71,61,0.82)]">
+      <p className="mt-5 whitespace-pre-line text-[1.03rem] leading-8 text-[rgba(41,71,61,0.82)]">
         {blok.text || "Fuege hier einen erklaerenden Text in Storyblok hinzu."}
       </p>
     </article>
