@@ -11,6 +11,14 @@
     "components"
   ],
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DennisFoerster/storyblok-components.git"
+  },
+  "homepage": "https://github.com/DennisFoerster/storyblok-components",
+  "bugs": {
+    "url": "https://github.com/DennisFoerster/storyblok-components/issues"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
