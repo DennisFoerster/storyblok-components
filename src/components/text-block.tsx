@@ -128,15 +128,15 @@ function resolveWidthClass(value: StoryblokSingleOptionField) {
   switch (width) {
     case "narrow":
     case "schmal":
-      return "max-w-[42rem]";
+      return { maxWidth: "42rem" };
     case "wide":
     case "breit":
-      return "max-w-[72rem]";
+      return { maxWidth: "72rem" };
     case "full":
     case "voll":
-      return "max-w-none";
+      return { maxWidth: "100%" };
     default:
-      return "max-w-[56rem]";
+      return { maxWidth: "56rem" };
   }
 }
 
@@ -146,18 +146,27 @@ function resolvePaddingClass(value: StoryblokSingleOptionField) {
   switch (size) {
     case "none":
     case "keine":
-      return "";
+      return {};
     case "small":
     case "klein":
     case "compact":
     case "kompakt":
-      return "px-6 py-6 md:px-8 md:py-8";
+      return {
+        paddingInline: "1.5rem",
+        paddingBlock: "1.5rem",
+      };
     case "large":
     case "gross":
     case "groß":
-      return "px-8 py-8 md:px-12 md:py-12";
+      return {
+        paddingInline: "3rem",
+        paddingBlock: "3rem",
+      };
     default:
-      return "px-7 py-7 md:px-10 md:py-10";
+      return {
+        paddingInline: "2.25rem",
+        paddingBlock: "2.25rem",
+      };
   }
 }
 
@@ -187,8 +196,8 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
   const textAlign = resolveAlignClass(blok.text_align);
   const headlineSizeStyles = resolveHeadlineSize(blok.headline_size);
   const textSizeStyles = resolveTextSize(blok.text_size);
-  const widthClass = resolveWidthClass(blok.container_width);
-  const paddingClass = resolvePaddingClass(blok.padding_size);
+  const widthStyles = resolveWidthClass(blok.container_width);
+  const paddingStyles = resolvePaddingClass(blok.padding_size);
   const surfaceClasses = resolveSurfaceClasses(blok.surface_style);
   const hasHeadline = Boolean(blok.headline?.trim());
 
@@ -200,23 +209,25 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
       <div
         className={[
           "mx-auto w-full",
-          widthClass,
           surfaceClasses,
-          paddingClass,
         ].join(" ")}
-        style={{ backgroundColor }}
+        style={{
+          backgroundColor,
+          ...widthStyles,
+          ...paddingStyles,
+        }}
       >
         {hasHeadline ? (
           <h2
             className={[
               "font-display tracking-[-0.03em]",
-              blok.headline_bold ? "font-bold" : "font-normal",
               headlineAlign,
             ].join(" ")}
             style={{
               color: headlineColor,
               fontSize: headlineSizeStyles.fontSize,
               lineHeight: headlineSizeStyles.lineHeight,
+              fontWeight: blok.headline_bold ? 700 : 400,
             }}
           >
             {blok.headline}
