@@ -68,21 +68,18 @@ function resolveContentAlign(value: StoryblokSingleOptionField) {
     case "mittig":
       return {
         align: "center" as const,
-        itemsClassName: "items-center",
-        selfClassName: "self-center",
+        iconAlignSelf: "center" as const,
       };
     case "right":
     case "rechts":
       return {
         align: "right" as const,
-        itemsClassName: "items-end",
-        selfClassName: "self-end",
+        iconAlignSelf: "flex-end" as const,
       };
     default:
       return {
         align: "left" as const,
-        itemsClassName: "items-start",
-        selfClassName: "self-start",
+        iconAlignSelf: "flex-start" as const,
       };
   }
 }
@@ -118,12 +115,13 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
   return (
     <article
       {...storyblokEditable(blok)}
-      className={`flex h-full w-full flex-col rounded-[1.9rem] border border-[rgba(41,71,61,0.1)] px-8 py-8 lg:px-10 lg:py-10 shadow-[0_16px_36px_rgba(41,71,61,0.05)] ${contentAlign.itemsClassName}`}
+      className="flex h-full w-full flex-col rounded-[1.9rem] border border-[rgba(41,71,61,0.1)] px-8 py-8 lg:px-10 lg:py-10 shadow-[0_16px_36px_rgba(41,71,61,0.05)]"
       style={{ backgroundColor: "var(--feature-cards-bg, #edf8f5)" }}
     >
       {blok.icon?.filename ? (
         <div
-          className={`flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-[rgba(41,71,61,0.12)] bg-white/55 ${contentAlign.selfClassName}`}
+          className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-[rgba(41,71,61,0.12)] bg-white/55"
+          style={{ alignSelf: contentAlign.iconAlignSelf }}
         >
           <Image
             src={blok.icon.filename}
