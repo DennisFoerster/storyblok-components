@@ -8,12 +8,19 @@ const MULTI_LINE_MIN_FONT_SIZE = 24;
 const MAX_LINES_FALLBACK = 2;
 const LINE_HEIGHT = 1.02;
 
-function clampLines(value?: number) {
-  if (!Number.isFinite(value)) {
+function clampLines(value?: number | string | null) {
+  const parsed =
+    typeof value === "number"
+      ? value
+      : typeof value === "string"
+        ? Number.parseInt(value, 10)
+        : Number.NaN;
+
+  if (!Number.isFinite(parsed)) {
     return MAX_LINES_FALLBACK;
   }
 
-  return Math.min(4, Math.max(1, Math.round(value!)));
+  return Math.min(4, Math.max(1, Math.round(parsed)));
 }
 
 export default function FeatureCardHeadline({
@@ -22,7 +29,7 @@ export default function FeatureCardHeadline({
   align = "left",
 }: {
   text: string;
-  maxLines?: number;
+  maxLines?: number | string | null;
   align?: "left" | "center" | "right";
 }) {
   const ref = useRef<HTMLHeadingElement>(null);

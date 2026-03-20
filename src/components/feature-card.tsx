@@ -18,7 +18,7 @@ type FeatureCardBlok = SbBlokData & {
   text?: string;
   icon?: StoryblokAssetField;
   text_size?: StoryblokSingleOptionField;
-  headline_max_lines?: number;
+  headline_max_lines?: number | string;
   content_align?: StoryblokSingleOptionField;
 };
 
@@ -69,17 +69,20 @@ function resolveContentAlign(value: StoryblokSingleOptionField) {
       return {
         align: "center" as const,
         itemsClassName: "items-center",
+        selfClassName: "self-center",
       };
     case "right":
     case "rechts":
       return {
         align: "right" as const,
         itemsClassName: "items-end",
+        selfClassName: "self-end",
       };
     default:
       return {
         align: "left" as const,
         itemsClassName: "items-start",
+        selfClassName: "self-start",
       };
   }
 }
@@ -119,7 +122,9 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
       style={{ backgroundColor: "var(--feature-cards-bg, #edf8f5)" }}
     >
       {blok.icon?.filename ? (
-        <div className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-[rgba(41,71,61,0.12)] bg-white/55">
+        <div
+          className={`flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-[rgba(41,71,61,0.12)] bg-white/55 ${contentAlign.selfClassName}`}
+        >
           <Image
             src={blok.icon.filename}
             alt={blok.icon.alt || blok.headline || "Icon"}
