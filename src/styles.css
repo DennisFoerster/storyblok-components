@@ -35,6 +35,10 @@
     flex-direction: row;
   }
 
+  .sb-image-text-section--image-right .sb-image-text-section__layout {
+    flex-direction: row-reverse;
+  }
+
   .sb-image-text-section__media,
   .sb-image-text-section__content {
     flex: 0 0 50%;

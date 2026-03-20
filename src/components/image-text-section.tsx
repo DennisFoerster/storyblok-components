@@ -151,10 +151,10 @@ export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok 
   return (
     <section
       {...storyblokEditable(blok)}
-      className="sb-image-text-section w-full overflow-hidden rounded-[2.2rem] border border-[rgba(53,88,77,0.08)] bg-[rgba(255,251,245,0.86)] shadow-[0_20px_50px_rgba(84,65,50,0.06)]"
+      className={`sb-image-text-section w-full overflow-hidden rounded-[2.2rem] border border-[rgba(53,88,77,0.08)] bg-[rgba(255,251,245,0.86)] shadow-[0_20px_50px_rgba(84,65,50,0.06)] ${imageIsRight ? "sb-image-text-section--image-right" : ""}`}
     >
       <div className="sb-image-text-section__layout">
-        <div className={`sb-image-text-section__media ${imageIsRight ? "lg:order-2" : "lg:order-1"}`}>
+        <div className="sb-image-text-section__media">
           <div className="relative h-full min-h-[320px] bg-[linear-gradient(135deg,rgba(207,184,162,0.2),rgba(255,255,255,0.55))] lg:min-h-[460px]">
             {blok.image?.filename ? (
               <Image
@@ -172,7 +172,7 @@ export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok 
           </div>
         </div>
 
-        <div className={`sb-image-text-section__content ${imageIsRight ? "lg:order-1" : "lg:order-2"}`}>
+        <div className="sb-image-text-section__content">
           <div className="p-8 sm:p-10 lg:p-14">
             <div className="w-full max-w-2xl" style={contentAlignmentStyles}>
               {blok.headline ? (
