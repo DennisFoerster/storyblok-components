@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
+import FeatureCardHeadline from "./feature-card-headline";
 
 type StoryblokAssetField = {
   filename?: string;
@@ -17,6 +18,7 @@ type FeatureCardBlok = SbBlokData & {
   text?: string;
   icon?: StoryblokAssetField;
   text_size?: StoryblokSingleOptionField;
+  headline_max_lines?: number;
 };
 
 function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
@@ -81,6 +83,7 @@ function resolveImageDimensions(asset?: StoryblokAssetField) {
 export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
   const iconDimensions = resolveImageDimensions(blok.icon);
   const textSizeStyles = resolveTextSize(blok.text_size);
+  const headline = blok.headline || "Uberschrift";
 
   return (
     <article
@@ -102,9 +105,7 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
         )}
       </div>
 
-      <h3 className="mt-11 text-[2rem] font-semibold leading-[1.02] tracking-[-0.03em] text-foreground">
-        {blok.headline || "Uberschrift"}
-      </h3>
+      <FeatureCardHeadline text={headline} maxLines={blok.headline_max_lines} />
 
       <p
         className="mt-5 whitespace-pre-line text-[rgba(41,71,61,0.82)]"

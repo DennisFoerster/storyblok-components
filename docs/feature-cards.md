@@ -19,6 +19,9 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
 
 - `headline`
   Typ: `Text`
+- `headline_max_lines`
+  Typ: `Number`
+  Beispiel: `1`, `2`, `3`
 - `text`
   Typ: `Textarea`
 - `text_size`
@@ -34,3 +37,4 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
 - mobil gestapelt
 - auf Desktop volle Breite innerhalb des Seitencontainers
 - Kartenhoehe visuell angeglichen
+- Ueberschriften koennen dynamisch auf eine maximale Zeilenanzahl eingepasst werden
