@@ -19,6 +19,9 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
 
 - `headline`
   Typ: `Text`
+- `headline_size`
+  Typ: `Single-Option`
+  Werte: `small`, `medium`, `large`
 - `headline_max_lines`
   Typ: `Number`
   Beispiel: `1`, `2`, `3`

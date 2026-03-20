@@ -27,14 +27,16 @@ function clampLines(value?: number | string | null) {
 export default function FeatureCardHeadline({
   text,
   maxLines,
+  scale = 1,
   align = "left",
 }: {
   text: string;
   maxLines?: number | string | null;
+  scale?: number;
   align?: "left" | "center" | "right";
 }) {
   const ref = useRef<HTMLHeadingElement>(null);
-  const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
+  const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE * scale);
   const resolvedMaxLines = clampLines(maxLines);
 
   useLayoutEffect(() => {
@@ -49,11 +51,13 @@ export default function FeatureCardHeadline({
         return;
       }
 
+      const maxFontSize = DEFAULT_FONT_SIZE * scale;
       const minFontSize =
-        resolvedMaxLines === 1 ? SINGLE_LINE_MIN_FONT_SIZE : MULTI_LINE_MIN_FONT_SIZE;
+        (resolvedMaxLines === 1 ? SINGLE_LINE_MIN_FONT_SIZE : MULTI_LINE_MIN_FONT_SIZE) *
+        scale;
 
       let low = minFontSize;
-      let high = DEFAULT_FONT_SIZE;
+      let high = maxFontSize;
       let best = minFontSize;
 
       const fits = (size: number) => {
@@ -109,7 +113,7 @@ export default function FeatureCardHeadline({
       window.cancelAnimationFrame(rafB);
       observer.disconnect();
     };
-  }, [resolvedMaxLines, text]);
+  }, [resolvedMaxLines, scale, text]);
 
   return (
     <h3

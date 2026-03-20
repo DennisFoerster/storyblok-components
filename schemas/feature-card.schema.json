@@ -3,6 +3,7 @@
   "display_name": "Feature Card",
   "fields": [
     { "name": "headline", "type": "text" },
+    { "name": "headline_size", "type": "single_option" },
     { "name": "headline_max_lines", "type": "number" },
     { "name": "text", "type": "textarea" },
     { "name": "text_size", "type": "single_option" },

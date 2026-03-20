@@ -18,6 +18,7 @@ type FeatureCardBlok = SbBlokData & {
   text?: string;
   icon?: StoryblokAssetField;
   text_size?: StoryblokSingleOptionField;
+  headline_size?: StoryblokSingleOptionField;
   headline_max_lines?: number | string;
   content_align?: StoryblokSingleOptionField;
 };
@@ -56,6 +57,22 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
         fontSize: "var(--sb-body-text-medium-size)",
         lineHeight: "var(--sb-body-text-medium-line-height)",
       };
+  }
+}
+
+function resolveHeadlineScale(value: StoryblokSingleOptionField) {
+  const size = resolveSingleOption(value, "medium").trim().toLowerCase();
+
+  switch (size) {
+    case "small":
+    case "klein":
+      return 0.84;
+    case "large":
+    case "gross":
+    case "groß":
+      return 1.14;
+    default:
+      return 1;
   }
 }
 
@@ -109,6 +126,7 @@ function resolveImageDimensions(asset?: StoryblokAssetField) {
 export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
   const iconDimensions = resolveImageDimensions(blok.icon);
   const textSizeStyles = resolveTextSize(blok.text_size);
+  const headlineScale = resolveHeadlineScale(blok.headline_size);
   const headline = blok.headline || "Uberschrift";
   const contentAlign = resolveContentAlign(blok.content_align);
 
@@ -135,6 +153,7 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
 
       <FeatureCardHeadline
         text={headline}
+        scale={headlineScale}
         maxLines={blok.headline_max_lines}
         align={contentAlign.align}
       />
