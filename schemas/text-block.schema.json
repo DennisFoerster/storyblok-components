@@ -10,6 +10,10 @@
     { "name": "text", "type": "textarea", "required": true },
     { "name": "text_color", "type": "color" },
     { "name": "text_size", "type": "single_option" },
-    { "name": "text_align", "type": "single_option" }
+    { "name": "text_align", "type": "single_option" },
+    { "name": "container_width", "type": "single_option" },
+    { "name": "surface_style", "type": "single_option" },
+    { "name": "background_color", "type": "color" },
+    { "name": "padding_size", "type": "single_option" }
   ]
 }

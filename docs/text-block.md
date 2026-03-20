@@ -32,7 +32,25 @@ Block-Komponente: `text_block`
 - `text_align`
   Typ: `Single-Option`
   Werte: `left`, `center`, `right`
+- `container_width`
+  Typ: `Single-Option`
+  Werte: `narrow`, `medium`, `wide`, `full`
+- `surface_style`
+  Typ: `Single-Option`
+  Werte: `plain`, `soft`, `panel`, `line`
+- `background_color`
+  Typ: `Color Picker` oder Color-Plugin
+- `padding_size`
+  Typ: `Single-Option`
+  Werte: `none`, `small`, `medium`, `large`
 
 ## Hinweis
 
-Die Komponente ist bewusst einfach gehalten und eignet sich gut für Einleitungen, Zwischentexte und Content-Bereiche ohne Karten- oder Bildlogik.
+Die Komponente bleibt bewusst rein textbasiert, bietet aber mehr gestalterische Freiheit:
+
+- Überschrift bleibt optional und wird bei leerem Feld komplett ausgelassen
+- Breite des Textblocks ist steuerbar
+- Oberfläche kann neutral, weich, kartenartig oder mit feiner Linie gestaltet werden
+- Innenabstände und Hintergrundfarbe sind optional steuerbar
+
+Dadurch eignet sie sich gut für Einleitungen, Zwischentexte, hervorgehobene Praxistexte oder ruhig gestaltete Content-Bereiche ohne Bild- oder Kartenlogik.
