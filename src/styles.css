@@ -14,9 +14,31 @@
   padding-inline: 1.5rem;
 }
 
+.sb-image-text-section__layout {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sb-image-text-section__media,
+.sb-image-text-section__content {
+  width: 100%;
+  min-width: 0;
+}
+
 @media (min-width: 1024px) {
   .storyblok-sections-container {
     padding-inline: 2.5rem;
+  }
+
+  .sb-image-text-section__layout {
+    flex-direction: row;
+  }
+
+  .sb-image-text-section__media,
+  .sb-image-text-section__content {
+    flex: 0 0 50%;
+    max-width: 50%;
   }
 }
 
