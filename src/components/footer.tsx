@@ -61,7 +61,13 @@ export default function Footer({ blok }: { blok: FooterBlok }) {
     >
       <div className="storyblok-sections-container flex flex-col gap-8 py-10 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
-          <p className="text-sm leading-7 text-[rgba(41,71,61,0.74)]">
+          <p
+            className="text-[rgba(41,71,61,0.74)]"
+            style={{
+              fontSize: "var(--sb-body-text-small-size)",
+              lineHeight: "var(--sb-body-text-small-line-height)",
+            }}
+          >
             {blok.text ||
               "© Homoeopathie Heinecke. Impressum, Datenschutz und Kontaktlinks lassen sich in Storyblok zentral pflegen."}
           </p>

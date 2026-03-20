@@ -62,7 +62,13 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
         {blok.headline || "Uberschrift"}
       </h3>
 
-      <p className="mt-5 whitespace-pre-line text-[1.03rem] leading-8 text-[rgba(41,71,61,0.82)]">
+      <p
+        className="mt-5 whitespace-pre-line text-[rgba(41,71,61,0.82)]"
+        style={{
+          fontSize: "var(--sb-body-text-medium-size)",
+          lineHeight: "var(--sb-body-text-medium-line-height)",
+        }}
+      >
         {blok.text || "Fuege hier einen erklaerenden Text in Storyblok hinzu."}
       </p>
     </article>

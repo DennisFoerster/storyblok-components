@@ -122,13 +122,25 @@ function resolveHeadlineSize(size?: string) {
 function resolveTextSize(size?: string) {
   switch (size) {
     case "small":
-      return "text-[0.98rem] leading-7";
+      return {
+        fontSize: "var(--sb-body-text-small-size)",
+        lineHeight: "var(--sb-body-text-small-line-height)",
+      };
     case "medium":
-      return "text-[1.03rem] leading-8";
+      return {
+        fontSize: "var(--sb-body-text-medium-size)",
+        lineHeight: "var(--sb-body-text-medium-line-height)",
+      };
     case "large":
-      return "text-[1.12rem] leading-8";
+      return {
+        fontSize: "var(--sb-body-text-large-size)",
+        lineHeight: "var(--sb-body-text-large-line-height)",
+      };
     default:
-      return "text-[1.03rem] leading-8";
+      return {
+        fontSize: "var(--sb-body-text-medium-size)",
+        lineHeight: "var(--sb-body-text-medium-line-height)",
+      };
   }
 }
 
@@ -167,6 +179,7 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
   const imageAnimationSpeed = resolveAnimationSpeed(blok.image_animation_speed);
   const imageAnimationDelay = resolveAnimationDelayMs(blok.image_animation_delay, 120);
   const imageAnimationDistance = resolveAnimationDistance(blok.image_animation_distance, 56);
+  const textSizeStyles = resolveTextSize(blok.text_size);
 
   return (
     <section
@@ -235,8 +248,12 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
         </h1>
         {blok.text ? (
           <p
-            className={`mt-7 max-w-xl whitespace-pre-line ${resolveTextSize(blok.text_size)}`}
-            style={{ color: textColor }}
+            className="mt-7 max-w-xl whitespace-pre-line"
+            style={{
+              color: textColor,
+              fontSize: textSizeStyles.fontSize,
+              lineHeight: textSizeStyles.lineHeight,
+            }}
           >
             {blok.text}
           </p>

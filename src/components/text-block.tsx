@@ -104,20 +104,20 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
     case "small":
     case "klein":
       return {
-        fontSize: "var(--sb-text-block-small-size)",
-        lineHeight: "var(--sb-text-block-small-line-height)",
+        fontSize: "var(--sb-body-text-small-size)",
+        lineHeight: "var(--sb-body-text-small-line-height)",
       };
     case "large":
     case "gross":
     case "groß":
       return {
-        fontSize: "var(--sb-text-block-large-size)",
-        lineHeight: "var(--sb-text-block-large-line-height)",
+        fontSize: "var(--sb-body-text-large-size)",
+        lineHeight: "var(--sb-body-text-large-line-height)",
       };
     default:
       return {
-        fontSize: "var(--sb-text-block-medium-size)",
-        lineHeight: "var(--sb-text-block-medium-line-height)",
+        fontSize: "var(--sb-body-text-medium-size)",
+        lineHeight: "var(--sb-body-text-medium-line-height)",
       };
   }
 }
