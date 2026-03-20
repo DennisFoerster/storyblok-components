@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
@@ -63,13 +64,19 @@ function resolveHeadlineSize(value: StoryblokSingleOptionField) {
   switch (size) {
     case "small":
     case "klein":
-      return "text-[2rem] sm:text-[2.3rem]";
+      return {
+        fontSize: "clamp(2rem, 3.5vw, 2.3rem)",
+      };
     case "large":
     case "gross":
     case "groß":
-      return "text-[2.7rem] sm:text-[3.2rem]";
+      return {
+        fontSize: "clamp(2.7rem, 4.6vw, 3.2rem)",
+      };
     default:
-      return "text-[2.3rem] sm:text-[2.7rem]";
+      return {
+        fontSize: "clamp(2.3rem, 4vw, 2.7rem)",
+      };
   }
 }
 
@@ -102,28 +109,32 @@ function resolveTextAlign(value: StoryblokSingleOptionField) {
   const align = resolveSingleOption(value, "left").trim().toLowerCase();
 
   if (align === "center" || align === "mittig" || align === "mitte") {
-    return "text-center";
+    return "center";
   }
 
   if (align === "right" || align === "rechts") {
-    return "text-right";
+    return "right";
   }
 
-  return "text-left";
+  return "left";
 }
 
-function resolveTextBlockAlign(value: StoryblokSingleOptionField) {
+function resolveContentAlignmentStyles(value: StoryblokSingleOptionField): CSSProperties {
   const align = resolveSingleOption(value, "left").trim().toLowerCase();
 
   if (align === "center" || align === "mittig" || align === "mitte") {
-    return "items-center";
+    return {
+      marginInline: "auto",
+    };
   }
 
   if (align === "right" || align === "rechts") {
-    return "items-end";
+    return {
+      marginLeft: "auto",
+    };
   }
 
-  return "items-start";
+  return {};
 }
 
 export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok }) {
@@ -131,7 +142,10 @@ export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok 
   const imageIsRight = Boolean(blok.image_right);
   const headlineAlign = resolveTextAlign(blok.headline_align);
   const textAlign = resolveTextAlign(blok.text_align);
-  const textBlockAlign = resolveTextBlockAlign(blok.text_align ?? blok.headline_align);
+  const contentAlignmentStyles = resolveContentAlignmentStyles(
+    blok.text_align ?? blok.headline_align,
+  );
+  const headlineSizeStyles = resolveHeadlineSize(blok.headline_size);
   const textSizeStyles = resolveTextSize(blok.text_size);
 
   return (
@@ -159,21 +173,24 @@ export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok 
         </div>
 
         <div className={`sb-image-text-section__content ${imageIsRight ? "lg:order-1" : "lg:order-2"}`}>
-          <div className={`flex p-8 sm:p-10 lg:p-14 ${textBlockAlign}`}>
-            <div className="w-full max-w-2xl">
+          <div className="p-8 sm:p-10 lg:p-14">
+            <div className="w-full max-w-2xl" style={contentAlignmentStyles}>
               {blok.headline ? (
                 <h2
-                  className={`font-display font-semibold leading-[1] tracking-[-0.03em] text-foreground ${headlineAlign} ${resolveHeadlineSize(
-                    blok.headline_size,
-                  )}`}
+                  className="font-display font-semibold leading-[1] tracking-[-0.03em] text-foreground"
+                  style={{
+                    textAlign: headlineAlign,
+                    ...headlineSizeStyles,
+                  }}
                 >
                   {blok.headline}
                 </h2>
               ) : null}
 
               <div
-                className={`mt-5 whitespace-pre-line text-[rgba(41,71,61,0.76)] ${textAlign}`}
+                className="mt-5 whitespace-pre-line text-[rgba(41,71,61,0.76)]"
                 style={{
+                  textAlign,
                   fontSize: textSizeStyles.fontSize,
                   lineHeight: textSizeStyles.lineHeight,
                 }}
