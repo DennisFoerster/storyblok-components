@@ -210,7 +210,7 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
           <h2
             className={[
               "font-display tracking-[-0.03em]",
-              blok.headline_bold ? "font-bold" : "font-semibold",
+              blok.headline_bold ? "font-bold" : "font-normal",
               headlineAlign,
             ].join(" ")}
             style={{
