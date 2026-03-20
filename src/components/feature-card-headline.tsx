@@ -7,6 +7,7 @@ const SINGLE_LINE_MIN_FONT_SIZE = 16;
 const MULTI_LINE_MIN_FONT_SIZE = 24;
 const MAX_LINES_FALLBACK = 2;
 const LINE_HEIGHT = 1.02;
+const SINGLE_LINE_SAFETY_PX = 10;
 
 function clampLines(value?: number | string | null) {
   const parsed =
@@ -60,7 +61,7 @@ export default function FeatureCardHeadline({
         target.style.lineHeight = String(LINE_HEIGHT);
 
         if (resolvedMaxLines === 1) {
-          return target.scrollWidth <= target.clientWidth + 1;
+          return target.scrollWidth <= target.clientWidth - SINGLE_LINE_SAFETY_PX;
         }
 
         const computed = window.getComputedStyle(target);
@@ -124,6 +125,7 @@ export default function FeatureCardHeadline({
         WebkitLineClamp: resolvedMaxLines === 1 ? undefined : resolvedMaxLines,
         WebkitBoxOrient: resolvedMaxLines === 1 ? undefined : "vertical",
         textAlign: align,
+        paddingInline: resolvedMaxLines === 1 ? "0.08em" : undefined,
       }}
     >
       {text}
