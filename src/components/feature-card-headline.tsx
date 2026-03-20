@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const DEFAULT_FONT_SIZE = 52;
-const MIN_FONT_SIZE = 28;
+const SINGLE_LINE_MIN_FONT_SIZE = 16;
+const MULTI_LINE_MIN_FONT_SIZE = 24;
 const MAX_LINES_FALLBACK = 2;
 const LINE_HEIGHT = 1.02;
 
@@ -26,7 +27,7 @@ export default function FeatureCardHeadline({
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
   const resolvedMaxLines = clampLines(maxLines);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = ref.current;
     if (!element) {
       return;
@@ -38,9 +39,12 @@ export default function FeatureCardHeadline({
         return;
       }
 
-      let low = MIN_FONT_SIZE;
+      const minFontSize =
+        resolvedMaxLines === 1 ? SINGLE_LINE_MIN_FONT_SIZE : MULTI_LINE_MIN_FONT_SIZE;
+
+      let low = minFontSize;
       let high = DEFAULT_FONT_SIZE;
-      let best = MIN_FONT_SIZE;
+      let best = minFontSize;
 
       const fits = (size: number) => {
         target.style.fontSize = `${size}px`;
@@ -91,9 +95,9 @@ export default function FeatureCardHeadline({
         fontSize: `${fontSize}px`,
         lineHeight: LINE_HEIGHT,
         whiteSpace: resolvedMaxLines === 1 ? "nowrap" : "normal",
-        display: "-webkit-box",
-        WebkitLineClamp: resolvedMaxLines,
-        WebkitBoxOrient: "vertical",
+        display: resolvedMaxLines === 1 ? "block" : "-webkit-box",
+        WebkitLineClamp: resolvedMaxLines === 1 ? undefined : resolvedMaxLines,
+        WebkitBoxOrient: resolvedMaxLines === 1 ? undefined : "vertical",
       }}
     >
       {text}
