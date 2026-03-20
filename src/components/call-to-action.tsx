@@ -245,6 +245,7 @@ function resolvePanelStyle(value: StoryblokSingleOptionField) {
 export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
   const layout = resolveLayout(blok.layout);
   const contentAlign = resolveAlign(blok.content_align);
+  const effectiveAlign = layout === "centered" ? "center" : contentAlign;
   const backgroundColor = resolveColor(blok.background_color, "#f7f1e7");
   const accentColor = resolveColor(blok.accent_color, "#caa36d");
   const eyebrowColor = resolveColor(blok.eyebrow_color, "#35584d");
@@ -263,9 +264,9 @@ export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
   const hasSecondaryCta = Boolean(blok.secondary_label && blok.secondary_link);
 
   const contentStyles: CSSProperties =
-    contentAlign === "center"
+    effectiveAlign === "center"
       ? { textAlign: "center", marginInline: "auto" }
-      : contentAlign === "right"
+      : effectiveAlign === "right"
         ? { textAlign: "right", marginLeft: "auto" }
         : { textAlign: "left" };
 
@@ -317,9 +318,9 @@ export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
                 color: headlineColor,
                 fontSize: headlineSizeStyles.fontSize,
                 lineHeight: headlineSizeStyles.lineHeight,
-                ...(contentAlign === "center"
+                ...(effectiveAlign === "center"
                   ? { marginInline: "auto" }
-                  : contentAlign === "right"
+                  : effectiveAlign === "right"
                     ? { marginLeft: "auto" }
                     : {}),
               }}
@@ -334,9 +335,9 @@ export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
                   color: textColor,
                   fontSize: textSizeStyles.fontSize,
                   lineHeight: textSizeStyles.lineHeight,
-                  ...(contentAlign === "center"
+                  ...(effectiveAlign === "center"
                     ? { marginInline: "auto" }
-                    : contentAlign === "right"
+                    : effectiveAlign === "right"
                       ? { marginLeft: "auto" }
                       : {}),
                 }}
@@ -351,14 +352,14 @@ export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
               className={[
                 "mt-8 flex flex-wrap gap-4",
                 layout === "centered"
-                  ? contentAlign === "center"
+                  ? effectiveAlign === "center"
                     ? "justify-center"
-                    : contentAlign === "right"
+                    : effectiveAlign === "right"
                       ? "justify-end"
                       : "justify-start"
                   : "lg:justify-end",
               ].join(" ")}
-              style={layout === "centered" ? undefined : contentAlign === "right" ? { marginLeft: "auto" } : undefined}
+              style={layout === "centered" ? undefined : effectiveAlign === "right" ? { marginLeft: "auto" } : undefined}
             >
               {hasPrimaryCta ? (
                 <a
