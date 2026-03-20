@@ -9,6 +9,7 @@
     { "name": "headline_size", "type": "single_option" },
     { "name": "text_size", "type": "single_option" },
     { "name": "headline_align", "type": "single_option" },
-    { "name": "text_align", "type": "single_option" }
+    { "name": "text_align", "type": "single_option" },
+    { "name": "text_background_color", "type": "color" }
   ]
 }

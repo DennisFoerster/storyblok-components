@@ -8,6 +8,13 @@ type StoryblokAssetField = {
   alt?: string;
 };
 
+type StoryblokColorField = {
+  value?: string;
+  color?: string;
+  plugin?: string;
+  rgba?: string;
+};
+
 type StoryblokSingleOptionField =
   | string
   | { value?: string; label?: string; name?: string }
@@ -22,6 +29,7 @@ type ImageTextSectionBlok = SbBlokData & {
   text_size?: StoryblokSingleOptionField;
   headline_align?: StoryblokSingleOptionField;
   text_align?: StoryblokSingleOptionField;
+  text_background_color?: StoryblokColorField | string;
 };
 
 function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
@@ -34,6 +42,21 @@ function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string
   }
 
   return value.value || value.label || value.name || fallback;
+}
+
+function resolveColor(
+  color: StoryblokColorField | string | undefined,
+  fallback: string,
+) {
+  if (!color) {
+    return fallback;
+  }
+
+  if (typeof color === "string") {
+    return color;
+  }
+
+  return color.value || color.color || color.rgba || color.plugin || fallback;
 }
 
 function resolveImageDimensions(asset?: StoryblokAssetField) {
@@ -147,6 +170,7 @@ export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok 
   );
   const headlineSizeStyles = resolveHeadlineSize(blok.headline_size);
   const textSizeStyles = resolveTextSize(blok.text_size);
+  const textBackgroundColor = resolveColor(blok.text_background_color, "#ffffff");
 
   return (
     <section
@@ -173,7 +197,10 @@ export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok 
         </div>
 
         <div className="sb-image-text-section__content">
-          <div className="p-8 sm:p-10 lg:p-14">
+          <div
+            className="h-full p-8 sm:p-10 lg:p-14"
+            style={{ backgroundColor: textBackgroundColor }}
+          >
             <div className="w-full max-w-2xl" style={contentAlignmentStyles}>
               {blok.headline ? (
                 <h2

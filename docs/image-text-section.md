@@ -29,6 +29,9 @@ Block-Komponente: `image_text_section`
 - `text_align`
   Typ: `Single-Option`
   Werte: `left`, `center`, `right`
+- `text_background_color`
+  Typ: `Color Picker` oder Color-Plugin
+  Standard: `#ffffff`
 
 ## Verhalten
 
@@ -36,3 +39,4 @@ Block-Komponente: `image_text_section`
 - Auf Mobile stapelt sich der Block untereinander
 - Das Bild kann per Switch links oder rechts erscheinen
 - Überschrift und Fließtext haben getrennte Größen- und Ausrichtungsoptionen
+- Die Hintergrundfarbe des Textbereichs ist separat konfigurierbar
