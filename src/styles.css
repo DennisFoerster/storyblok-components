@@ -1,4 +1,13 @@
- .storyblok-sections-container {
+:root {
+  --sb-text-block-small-size: 1.14rem;
+  --sb-text-block-small-line-height: 1.9;
+  --sb-text-block-medium-size: 1.34rem;
+  --sb-text-block-medium-line-height: 1.92;
+  --sb-text-block-large-size: 1.62rem;
+  --sb-text-block-large-line-height: 1.88;
+}
+
+.storyblok-sections-container {
   width: 100%;
   max-width: 1240px;
   margin-inline: auto;

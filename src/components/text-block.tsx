@@ -104,20 +104,20 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
     case "small":
     case "klein":
       return {
-        fontSize: "1rem",
-        lineHeight: 1.8,
+        fontSize: "var(--sb-text-block-small-size)",
+        lineHeight: "var(--sb-text-block-small-line-height)",
       };
     case "large":
     case "gross":
     case "groß":
       return {
-        fontSize: "1.2rem",
-        lineHeight: 1.95,
+        fontSize: "var(--sb-text-block-large-size)",
+        lineHeight: "var(--sb-text-block-large-line-height)",
       };
     default:
       return {
-        fontSize: "1.08rem",
-        lineHeight: 1.85,
+        fontSize: "var(--sb-text-block-medium-size)",
+        lineHeight: "var(--sb-text-block-medium-line-height)",
       };
   }
 }

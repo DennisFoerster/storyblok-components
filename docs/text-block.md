@@ -53,4 +53,15 @@ Die Komponente bleibt bewusst rein textbasiert, bietet aber mehr gestalterische 
 - Oberfläche kann neutral, weich, kartenartig oder mit feiner Linie gestaltet werden
 - Innenabstände und Hintergrundfarbe sind optional steuerbar
 
+## Globale Textskala
+
+Die Textgrößen des Fließtextes hängen an globalen CSS-Variablen und können projektweit überschrieben werden:
+
+- `--sb-text-block-small-size`
+- `--sb-text-block-small-line-height`
+- `--sb-text-block-medium-size`
+- `--sb-text-block-medium-line-height`
+- `--sb-text-block-large-size`
+- `--sb-text-block-large-line-height`
+
 Dadurch eignet sie sich gut für Einleitungen, Zwischentexte, hervorgehobene Praxistexte oder ruhig gestaltete Content-Bereiche ohne Bild- oder Kartenlogik.
