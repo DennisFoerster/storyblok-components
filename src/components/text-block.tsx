@@ -8,7 +8,10 @@ type StoryblokColorField = {
   rgba?: string;
 };
 
-type StoryblokSingleOptionField = string | { value?: string } | undefined;
+type StoryblokSingleOptionField =
+  | string
+  | { value?: string; label?: string; name?: string }
+  | undefined;
 
 type TextBlockBlok = SbBlokData & {
   headline?: string;
@@ -50,7 +53,7 @@ function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string
     return value;
   }
 
-  return value.value || fallback;
+  return value.value || value.label || value.name || fallback;
 }
 
 function resolveAlignClass(value: StoryblokSingleOptionField) {
@@ -106,6 +109,14 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
       return {
         fontSize: "var(--sb-body-text-small-size)",
         lineHeight: "var(--sb-body-text-small-line-height)",
+      };
+    case "medium":
+    case "mittel":
+    case "normal":
+    case "standard":
+      return {
+        fontSize: "var(--sb-body-text-medium-size)",
+        lineHeight: "var(--sb-body-text-medium-line-height)",
       };
     case "large":
     case "gross":

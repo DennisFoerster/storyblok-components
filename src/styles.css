@@ -1,10 +1,10 @@
 :root {
-  --sb-text-block-small-size: 1.14rem;
-  --sb-text-block-small-line-height: 1.9;
-  --sb-text-block-medium-size: 1.34rem;
-  --sb-text-block-medium-line-height: 1.92;
-  --sb-text-block-large-size: 1.62rem;
-  --sb-text-block-large-line-height: 1.88;
+  --sb-body-text-small-size: 1rem;
+  --sb-body-text-small-line-height: 1.85;
+  --sb-body-text-medium-size: 1.34rem;
+  --sb-body-text-medium-line-height: 1.92;
+  --sb-body-text-large-size: 1.82rem;
+  --sb-body-text-large-line-height: 1.8;
 }
 
 .storyblok-sections-container {
