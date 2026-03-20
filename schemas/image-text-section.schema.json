@@ -1,0 +1,14 @@
+{
+  "component": "image_text_section",
+  "display_name": "Image Text Section",
+  "fields": [
+    { "name": "image", "type": "asset" },
+    { "name": "image_right", "type": "boolean" },
+    { "name": "headline", "type": "text" },
+    { "name": "text", "type": "textarea" },
+    { "name": "headline_size", "type": "single_option" },
+    { "name": "text_size", "type": "single_option" },
+    { "name": "headline_align", "type": "single_option" },
+    { "name": "text_align", "type": "single_option" }
+  ]
+}
