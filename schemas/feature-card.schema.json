@@ -4,6 +4,7 @@
   "fields": [
     { "name": "headline", "type": "text" },
     { "name": "text", "type": "textarea" },
+    { "name": "text_size", "type": "single_option" },
     { "name": "icon", "type": "asset" }
   ]
 }

@@ -21,6 +21,9 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
   Typ: `Text`
 - `text`
   Typ: `Textarea`
+- `text_size`
+  Typ: `Single-Option`
+  Werte: `small`, `medium`, `large`
 - `icon`
   Typ: `Asset`
 

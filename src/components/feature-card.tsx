@@ -7,11 +7,54 @@ type StoryblokAssetField = {
   alt?: string;
 };
 
+type StoryblokSingleOptionField =
+  | string
+  | { value?: string; label?: string; name?: string }
+  | undefined;
+
 type FeatureCardBlok = SbBlokData & {
   headline?: string;
   text?: string;
   icon?: StoryblokAssetField;
+  text_size?: StoryblokSingleOptionField;
 };
+
+function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
+  if (!value) {
+    return fallback;
+  }
+
+  if (typeof value === "string") {
+    return value;
+  }
+
+  return value.value || value.label || value.name || fallback;
+}
+
+function resolveTextSize(value: StoryblokSingleOptionField) {
+  const size = resolveSingleOption(value, "medium").trim().toLowerCase();
+
+  switch (size) {
+    case "small":
+    case "klein":
+      return {
+        fontSize: "var(--sb-body-text-small-size)",
+        lineHeight: "var(--sb-body-text-small-line-height)",
+      };
+    case "large":
+    case "gross":
+    case "groß":
+      return {
+        fontSize: "var(--sb-body-text-large-size)",
+        lineHeight: "var(--sb-body-text-large-line-height)",
+      };
+    default:
+      return {
+        fontSize: "var(--sb-body-text-medium-size)",
+        lineHeight: "var(--sb-body-text-medium-line-height)",
+      };
+  }
+}
 
 function resolveImageDimensions(asset?: StoryblokAssetField) {
   const filename = asset?.filename;
@@ -37,6 +80,7 @@ function resolveImageDimensions(asset?: StoryblokAssetField) {
 
 export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
   const iconDimensions = resolveImageDimensions(blok.icon);
+  const textSizeStyles = resolveTextSize(blok.text_size);
 
   return (
     <article
@@ -65,8 +109,8 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
       <p
         className="mt-5 whitespace-pre-line text-[rgba(41,71,61,0.82)]"
         style={{
-          fontSize: "var(--sb-body-text-medium-size)",
-          lineHeight: "var(--sb-body-text-medium-line-height)",
+          fontSize: textSizeStyles.fontSize,
+          lineHeight: textSizeStyles.lineHeight,
         }}
       >
         {blok.text || "Fuege hier einen erklaerenden Text in Storyblok hinzu."}
