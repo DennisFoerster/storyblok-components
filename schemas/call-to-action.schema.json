@@ -1,0 +1,29 @@
+{
+  "component": "call_to_action",
+  "display_name": "Call To Action",
+  "fields": [
+    { "name": "eyebrow", "type": "text" },
+    { "name": "headline", "type": "text" },
+    { "name": "text", "type": "textarea" },
+    { "name": "primary_label", "type": "text" },
+    { "name": "primary_link", "type": "link" },
+    { "name": "secondary_label", "type": "text" },
+    { "name": "secondary_link", "type": "link" },
+    { "name": "layout", "type": "single_option" },
+    { "name": "content_align", "type": "single_option" },
+    { "name": "container_width", "type": "single_option" },
+    { "name": "headline_size", "type": "single_option" },
+    { "name": "text_size", "type": "single_option" },
+    { "name": "padding_size", "type": "single_option" },
+    { "name": "panel_style", "type": "single_option" },
+    { "name": "background_color", "type": "color" },
+    { "name": "accent_color", "type": "color" },
+    { "name": "eyebrow_color", "type": "color" },
+    { "name": "headline_color", "type": "color" },
+    { "name": "text_color", "type": "color" },
+    { "name": "primary_background_color", "type": "color" },
+    { "name": "primary_text_color", "type": "color" },
+    { "name": "secondary_background_color", "type": "color" },
+    { "name": "secondary_text_color", "type": "color" }
+  ]
+}

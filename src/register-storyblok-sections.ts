@@ -1,3 +1,4 @@
+import CallToAction from "./components/call-to-action";
 import Footer from "./components/footer";
 import FeatureCard from "./components/feature-card";
 import FeatureCards from "./components/feature-cards";
@@ -8,6 +9,7 @@ import TextBlock from "./components/text-block";
 
 export function registerStoryblokSections() {
   return {
+    call_to_action: CallToAction,
     footer: Footer,
     feature_card: FeatureCard,
     feature_cards: FeatureCards,

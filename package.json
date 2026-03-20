@@ -56,6 +56,7 @@
     "./docs/navigation": "./docs/navigation.md",
     "./docs/footer": "./docs/footer.md",
     "./docs/hero": "./docs/hero.md",
+    "./docs/call-to-action": "./docs/call-to-action.md",
     "./docs/feature-cards": "./docs/feature-cards.md",
     "./docs/text-block": "./docs/text-block.md",
     "./docs/image-text-section": "./docs/image-text-section.md"

@@ -1,3 +1,4 @@
+export { default as CallToAction } from "./components/call-to-action";
 export { default as Reveal } from "./animation/reveal";
 export { default as Footer } from "./components/footer";
 export { default as FeatureCard } from "./components/feature-card";
