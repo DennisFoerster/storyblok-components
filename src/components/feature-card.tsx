@@ -66,11 +66,11 @@ function resolveHeadlineScale(value: StoryblokSingleOptionField) {
   switch (size) {
     case "small":
     case "klein":
-      return 0.84;
+      return 0.92;
     case "large":
     case "gross":
     case "groß":
-      return 1.14;
+      return 1.34;
     default:
       return 1;
   }

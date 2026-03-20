@@ -2,9 +2,9 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 
-const DEFAULT_FONT_SIZE = 52;
-const SINGLE_LINE_MIN_FONT_SIZE = 16;
-const MULTI_LINE_MIN_FONT_SIZE = 24;
+const DEFAULT_FONT_SIZE = 64;
+const SINGLE_LINE_MIN_FONT_SIZE = 28;
+const MULTI_LINE_MIN_FONT_SIZE = 34;
 const MAX_LINES_FALLBACK = 2;
 const LINE_HEIGHT = 1.02;
 const SINGLE_LINE_SAFETY_PX = 10;
