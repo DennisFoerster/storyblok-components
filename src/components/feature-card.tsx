@@ -19,6 +19,7 @@ type FeatureCardBlok = SbBlokData & {
   icon?: StoryblokAssetField;
   text_size?: StoryblokSingleOptionField;
   headline_max_lines?: number;
+  content_align?: StoryblokSingleOptionField;
 };
 
 function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
@@ -58,6 +59,31 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
   }
 }
 
+function resolveContentAlign(value: StoryblokSingleOptionField) {
+  const align = resolveSingleOption(value, "left").trim().toLowerCase();
+
+  switch (align) {
+    case "center":
+    case "mitte":
+    case "mittig":
+      return {
+        align: "center" as const,
+        itemsClassName: "items-center",
+      };
+    case "right":
+    case "rechts":
+      return {
+        align: "right" as const,
+        itemsClassName: "items-end",
+      };
+    default:
+      return {
+        align: "left" as const,
+        itemsClassName: "items-start",
+      };
+  }
+}
+
 function resolveImageDimensions(asset?: StoryblokAssetField) {
   const filename = asset?.filename;
 
@@ -84,15 +110,16 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
   const iconDimensions = resolveImageDimensions(blok.icon);
   const textSizeStyles = resolveTextSize(blok.text_size);
   const headline = blok.headline || "Uberschrift";
+  const contentAlign = resolveContentAlign(blok.content_align);
 
   return (
     <article
       {...storyblokEditable(blok)}
-      className="flex h-full w-full flex-col rounded-[1.9rem] border border-[rgba(41,71,61,0.1)] px-8 py-8 lg:px-10 lg:py-10 shadow-[0_16px_36px_rgba(41,71,61,0.05)]"
+      className={`flex h-full w-full flex-col rounded-[1.9rem] border border-[rgba(41,71,61,0.1)] px-8 py-8 lg:px-10 lg:py-10 shadow-[0_16px_36px_rgba(41,71,61,0.05)] ${contentAlign.itemsClassName}`}
       style={{ backgroundColor: "var(--feature-cards-bg, #edf8f5)" }}
     >
-      <div className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-[rgba(41,71,61,0.12)] bg-white/55">
-        {blok.icon?.filename ? (
+      {blok.icon?.filename ? (
+        <div className="flex h-[5.5rem] w-[5.5rem] items-center justify-center rounded-full border border-[rgba(41,71,61,0.12)] bg-white/55">
           <Image
             src={blok.icon.filename}
             alt={blok.icon.alt || blok.headline || "Icon"}
@@ -100,18 +127,22 @@ export default function FeatureCard({ blok }: { blok: FeatureCardBlok }) {
             height={iconDimensions.height}
             className="h-14 w-14 object-contain"
           />
-        ) : (
-          <div className="h-4.5 w-4.5 rounded-full bg-[rgba(88,143,117,0.72)]" />
-        )}
-      </div>
+        </div>
+      ) : null}
 
-      <FeatureCardHeadline text={headline} maxLines={blok.headline_max_lines} />
+      <FeatureCardHeadline
+        text={headline}
+        maxLines={blok.headline_max_lines}
+        align={contentAlign.align}
+      />
 
       <p
         className="mt-5 whitespace-pre-line text-[rgba(41,71,61,0.82)]"
         style={{
           fontSize: textSizeStyles.fontSize,
           lineHeight: textSizeStyles.lineHeight,
+          textAlign: contentAlign.align,
+          width: "100%",
         }}
       >
         {blok.text || "Fuege hier einen erklaerenden Text in Storyblok hinzu."}

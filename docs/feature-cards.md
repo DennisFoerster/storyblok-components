@@ -27,6 +27,9 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
 - `text_size`
   Typ: `Single-Option`
   Werte: `small`, `medium`, `large`
+- `content_align`
+  Typ: `Single-Option`
+  Werte: `left`, `center`, `right`
 - `icon`
   Typ: `Asset`
 
@@ -38,3 +41,5 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
 - auf Desktop volle Breite innerhalb des Seitencontainers
 - Kartenhoehe visuell angeglichen
 - Ueberschriften koennen dynamisch auf eine maximale Zeilenanzahl eingepasst werden
+- wenn kein Icon gesetzt ist, wird das Icon-Element vollstaendig ausgeblendet
+- die komplette Karte kann links, mittig oder rechts ausgerichtet werden

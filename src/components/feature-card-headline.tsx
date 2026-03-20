@@ -19,9 +19,11 @@ function clampLines(value?: number) {
 export default function FeatureCardHeadline({
   text,
   maxLines,
+  align = "left",
 }: {
   text: string;
   maxLines?: number;
+  align?: "left" | "center" | "right";
 }) {
   const ref = useRef<HTMLHeadingElement>(null);
   const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
@@ -75,14 +77,28 @@ export default function FeatureCardHeadline({
     };
 
     fitHeadline();
+    const rafA = window.requestAnimationFrame(fitHeadline);
+    const rafB = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(fitHeadline);
+    });
+
+    const fontSet = document.fonts;
+    void fontSet.ready.then(() => {
+      fitHeadline();
+    });
 
     const observer = new ResizeObserver(() => {
       fitHeadline();
     });
 
     observer.observe(element);
+    if (element.parentElement) {
+      observer.observe(element.parentElement);
+    }
 
     return () => {
+      window.cancelAnimationFrame(rafA);
+      window.cancelAnimationFrame(rafB);
       observer.disconnect();
     };
   }, [resolvedMaxLines, text]);
@@ -94,10 +110,13 @@ export default function FeatureCardHeadline({
       style={{
         fontSize: `${fontSize}px`,
         lineHeight: LINE_HEIGHT,
+        width: "100%",
+        maxWidth: "100%",
         whiteSpace: resolvedMaxLines === 1 ? "nowrap" : "normal",
         display: resolvedMaxLines === 1 ? "block" : "-webkit-box",
         WebkitLineClamp: resolvedMaxLines === 1 ? undefined : resolvedMaxLines,
         WebkitBoxOrient: resolvedMaxLines === 1 ? undefined : "vertical",
+        textAlign: align,
       }}
     >
       {text}

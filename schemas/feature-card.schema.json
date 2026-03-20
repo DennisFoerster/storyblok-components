@@ -6,6 +6,7 @@
     { "name": "headline_max_lines", "type": "number" },
     { "name": "text", "type": "textarea" },
     { "name": "text_size", "type": "single_option" },
+    { "name": "content_align", "type": "single_option" },
     { "name": "icon", "type": "asset" }
   ]
 }
