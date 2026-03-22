@@ -4,6 +4,7 @@ export { default as Footer } from "./components/footer";
 export { default as FeatureCard } from "./components/feature-card";
 export { default as FeatureCards } from "./components/feature-cards";
 export { default as Hero } from "./components/hero";
+export { default as ImageBlock } from "./components/image-block";
 export { default as ImageTextSection } from "./components/image-text-section";
 export { default as Navigation } from "./components/navigation";
 export { default as TextBlock } from "./components/text-block";

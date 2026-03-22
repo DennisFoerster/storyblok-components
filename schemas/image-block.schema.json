@@ -1,0 +1,9 @@
+{
+  "component": "image_block",
+  "display_name": "Image Block",
+  "fields": [
+    { "name": "image", "type": "asset" },
+    { "name": "width_percent", "type": "number" },
+    { "name": "align", "type": "single_option" }
+  ]
+}

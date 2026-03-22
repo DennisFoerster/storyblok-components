@@ -12,6 +12,7 @@ GitHub-Repository:
 - `navigation`
 - `footer`
 - `hero`
+- `image_block`
 - `image_text_section`
 - `text_block`
 - `feature_cards`
@@ -85,6 +86,7 @@ export default nextConfig;
 - `docs/navigation.md`
 - `docs/footer.md`
 - `docs/hero.md`
+- `docs/image-block.md`
 - `docs/image-text-section.md`
 - `docs/text-block.md`
 - `docs/feature-cards.md`
@@ -99,6 +101,7 @@ Im Ordner `schemas/` liegen Referenzdateien für die anzulegenden Komponenten:
 - `footer.schema.json`
 - `footer-link.schema.json`
 - `hero.schema.json`
+- `image-block.schema.json`
 - `image-text-section.schema.json`
 - `text-block.schema.json`
 - `feature-cards.schema.json`
