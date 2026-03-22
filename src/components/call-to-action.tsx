@@ -351,15 +351,13 @@ export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
             <div
               className={[
                 "mt-8 flex flex-wrap gap-4",
-                layout === "centered"
-                  ? effectiveAlign === "center"
-                    ? "justify-center"
-                    : effectiveAlign === "right"
-                      ? "justify-end"
-                      : "justify-start"
-                  : "lg:justify-end",
+                effectiveAlign === "center"
+                  ? "justify-center"
+                  : effectiveAlign === "right"
+                    ? "justify-end"
+                    : "justify-start",
               ].join(" ")}
-              style={layout === "centered" ? undefined : effectiveAlign === "right" ? { marginLeft: "auto" } : undefined}
+              style={effectiveAlign === "right" ? { marginLeft: "auto" } : effectiveAlign === "center" ? { marginInline: "auto" } : undefined}
             >
               {hasPrimaryCta ? (
                 <a
