@@ -9,6 +9,7 @@ GitHub-Repository:
 ## Enthalten
 
 - `call_to_action`
+- `contact_details`
 - `navigation`
 - `footer`
 - `hero`
@@ -83,6 +84,7 @@ export default nextConfig;
 ## Storyblok-Doku
 
 - `docs/call-to-action.md`
+- `docs/contact-details.md`
 - `docs/navigation.md`
 - `docs/footer.md`
 - `docs/hero.md`
@@ -96,6 +98,7 @@ export default nextConfig;
 Im Ordner `schemas/` liegen Referenzdateien für die anzulegenden Komponenten:
 
 - `call-to-action.schema.json`
+- `contact-details.schema.json`
 - `navigation.schema.json`
 - `nav-item.schema.json`
 - `footer.schema.json`

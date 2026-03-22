@@ -1,0 +1,14 @@
+{
+  "component": "contact_details",
+  "display_name": "Contact Details",
+  "fields": [
+    { "name": "headline", "type": "text" },
+    { "name": "text", "type": "textarea" },
+    { "name": "headline_size", "type": "single_option" },
+    { "name": "text_size", "type": "single_option" },
+    { "name": "headline_bold", "type": "boolean" },
+    { "name": "address", "type": "textarea" },
+    { "name": "phone", "type": "text" },
+    { "name": "email", "type": "text" }
+  ]
+}
