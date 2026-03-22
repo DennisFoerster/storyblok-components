@@ -20,6 +20,9 @@ Block-Komponente: `contact_details`
   Werte: `small`, `medium`, `large`
 - `headline_bold`
   Typ: `Boolean`
+- `container_width`
+  Typ: `Single-Option`
+  Werte: `wide`, `full`
 - `address`
   Typ: `Textarea`
 - `phone`
@@ -33,3 +36,4 @@ Block-Komponente: `contact_details`
 - Rechte Spalte: immer genau `Adresse`, `Kontakt` und `E-Mail`
 - Icons und Zwischenüberschriften rechts sind fest im Component hinterlegt
 - Telefonnummer und E-Mail werden automatisch klickbar gerendert
+- `full` bricht den Block auf echte Browserbreite aus

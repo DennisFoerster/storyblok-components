@@ -3,6 +3,7 @@
   "display_name": "Feature Cards",
   "fields": [
     { "name": "background_color", "type": "color" },
+    { "name": "container_width", "type": "single_option" },
     { "name": "items", "type": "blocks", "restrict_components": ["feature_card"] }
   ]
 }

@@ -1,5 +1,6 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
+import { resolveWidthMode, type StoryblokSingleOptionField } from "../lib/width";
 
 type StoryblokLinkField = {
   cached_url?: string;
@@ -18,6 +19,7 @@ type FooterLinkBlok = SbBlokData & {
 
 type FooterBlok = SbBlokData & {
   text?: string;
+  container_width?: StoryblokSingleOptionField;
   links?: FooterLinkBlok[];
 };
 
@@ -54,12 +56,19 @@ function resolveHref(link?: StoryblokLinkField | string, fallback = "#") {
 }
 
 export default function Footer({ blok }: { blok: FooterBlok }) {
+  const widthMode = resolveWidthMode(blok.container_width);
+
   return (
     <footer
       {...storyblokEditable(blok)}
       className="mt-14 w-full border-t border-[rgba(53,88,77,0.08)] bg-[rgba(250,246,239,0.92)]"
     >
-      <div className="storyblok-sections-container flex flex-col gap-8 py-10 lg:flex-row lg:items-end lg:justify-between">
+      <div
+        className={[
+          "storyblok-sections-container flex flex-col gap-8 py-10 lg:flex-row lg:items-end lg:justify-between",
+          widthMode === "full" ? "storyblok-sections-container--full" : "",
+        ].join(" ")}
+      >
         <div className="max-w-2xl">
           <p
             className="text-[rgba(41,71,61,0.74)]"

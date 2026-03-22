@@ -29,6 +29,9 @@ Block-Komponente: `image_text_section`
 - `text_align`
   Typ: `Single-Option`
   Werte: `left`, `center`, `right`
+- `container_width`
+  Typ: `Single-Option`
+  Werte: `wide`, `full`
 - `text_background_color`
   Typ: `Color Picker` oder Color-Plugin
   Standard: `#ffffff`
@@ -40,3 +43,4 @@ Block-Komponente: `image_text_section`
 - Das Bild kann per Switch links oder rechts erscheinen
 - Überschrift und Fließtext haben getrennte Größen- und Ausrichtungsoptionen
 - Die Hintergrundfarbe des Textbereichs ist separat konfigurierbar
+- `full` bricht den Block auf echte Browserbreite aus

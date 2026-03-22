@@ -3,6 +3,7 @@
   "display_name": "Footer",
   "fields": [
     { "name": "text", "type": "textarea" },
+    { "name": "container_width", "type": "single_option" },
     { "name": "links", "type": "blocks", "restrict_components": ["footer_link"] }
   ]
 }

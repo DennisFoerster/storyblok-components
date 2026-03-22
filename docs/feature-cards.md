@@ -11,6 +11,9 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
 
 - `background_color`
   Typ: `Color Picker` oder Color-Plugin
+- `container_width`
+  Typ: `Single-Option`
+  Werte: `wide`, `full`
 - `items`
   Typ: `Blocks`
   Erlaubte Komponenten: `feature_card`
@@ -42,6 +45,7 @@ Grid-Komponente fuer 1 bis 4 Kacheln.
 - 1 bis 4 Elemente moeglich
 - mobil gestapelt
 - auf Desktop volle Breite innerhalb des Seitencontainers
+- `full` bricht das Grid auf echte Browserbreite aus
 - Kartenhoehe visuell angeglichen
 - Ueberschriften koennen dynamisch auf eine maximale Zeilenanzahl eingepasst werden
 - wenn kein Icon gesetzt ist, wird das Icon-Element vollstaendig ausgeblendet

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { StoryblokServerComponent, storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
+import { resolveWidthMode, type StoryblokSingleOptionField } from "../lib/width";
 
 type StoryblokColorField = {
   value?: string;
@@ -11,6 +12,7 @@ type StoryblokColorField = {
 
 type FeatureCardsBlok = SbBlokData & {
   background_color?: StoryblokColorField | string;
+  container_width?: StoryblokSingleOptionField;
   items?: SbBlokData[];
 };
 
@@ -34,6 +36,7 @@ export default function FeatureCards({ blok }: { blok: FeatureCardsBlok }) {
   const backgroundColor = resolveColor(blok.background_color, "#edf8f5");
   const desktopColumns =
     items.length >= 4 ? "repeat(4, minmax(0, 1fr))" : `repeat(${Math.max(items.length, 1)}, minmax(0, 1fr))`;
+  const widthMode = resolveWidthMode(blok.container_width);
 
   return (
     <section
@@ -46,7 +49,12 @@ export default function FeatureCards({ blok }: { blok: FeatureCardsBlok }) {
         } as CSSProperties
       }
     >
-      <div className="mx-auto grid w-full gap-8 md:grid-cols-2 lg:gap-10 xl:grid-cols-[var(--feature-cards-columns)]">
+      <div
+        className={[
+          "grid w-full gap-8 md:grid-cols-2 lg:gap-10 xl:grid-cols-[var(--feature-cards-columns)]",
+          widthMode === "full" ? "sb-section-width-full" : "mx-auto",
+        ].join(" ")}
+      >
         {items.length > 0 ? (
           items.map((item) => <StoryblokServerComponent blok={item} key={item._uid} />)
         ) : (

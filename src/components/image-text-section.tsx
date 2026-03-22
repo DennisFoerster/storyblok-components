@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
+import { resolveWidthMode, resolveSingleOption, type StoryblokSingleOptionField } from "../lib/width";
 
 type StoryblokAssetField = {
   filename?: string;
@@ -15,11 +16,6 @@ type StoryblokColorField = {
   rgba?: string;
 };
 
-type StoryblokSingleOptionField =
-  | string
-  | { value?: string; label?: string; name?: string }
-  | undefined;
-
 type ImageTextSectionBlok = SbBlokData & {
   image?: StoryblokAssetField;
   image_right?: boolean;
@@ -29,20 +25,9 @@ type ImageTextSectionBlok = SbBlokData & {
   text_size?: StoryblokSingleOptionField;
   headline_align?: StoryblokSingleOptionField;
   text_align?: StoryblokSingleOptionField;
+  container_width?: StoryblokSingleOptionField;
   text_background_color?: StoryblokColorField | string;
 };
-
-function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
-  if (!value) {
-    return fallback;
-  }
-
-  if (typeof value === "string") {
-    return value;
-  }
-
-  return value.value || value.label || value.name || fallback;
-}
 
 function resolveColor(
   color: StoryblokColorField | string | undefined,
@@ -171,11 +156,12 @@ export default function ImageTextSection({ blok }: { blok: ImageTextSectionBlok 
   const headlineSizeStyles = resolveHeadlineSize(blok.headline_size);
   const textSizeStyles = resolveTextSize(blok.text_size);
   const textBackgroundColor = resolveColor(blok.text_background_color, "#ffffff");
+  const widthMode = resolveWidthMode(blok.container_width);
 
   return (
     <section
       {...storyblokEditable(blok)}
-      className={`sb-image-text-section w-full overflow-hidden rounded-[2.2rem] border border-[rgba(53,88,77,0.08)] bg-[rgba(255,251,245,0.86)] shadow-[0_20px_50px_rgba(84,65,50,0.06)] ${imageIsRight ? "sb-image-text-section--image-right" : ""}`}
+      className={`sb-image-text-section w-full overflow-hidden rounded-[2.2rem] border border-[rgba(53,88,77,0.08)] bg-[rgba(255,251,245,0.86)] shadow-[0_20px_50px_rgba(84,65,50,0.06)] ${imageIsRight ? "sb-image-text-section--image-right" : ""} ${widthMode === "full" ? "sb-section-width-full" : ""}`}
     >
       <div className="sb-image-text-section__layout">
         <div className="sb-image-text-section__media">

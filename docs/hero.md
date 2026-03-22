@@ -38,6 +38,9 @@ Block-Komponente: `hero`
 - `text_size`
   Typ: `Single-Option`
   Werte: `small`, `medium`, `large`
+- `container_width`
+  Typ: `Single-Option`
+  Werte: `wide`, `full`
 - `image_animation`
   Typ: `Single-Option`
   Werte: `none`, `fade`, `slide`, `zoom`, `blur`
@@ -59,6 +62,7 @@ Block-Komponente: `hero`
 - Delay: `120`
 - Distanz: `56`
 - Trigger: `mount`
+- `full` bricht den Hero auf echte Browserbreite aus
 
 ## Empfehlung
 

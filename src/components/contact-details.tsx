@@ -1,11 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
-
-type StoryblokSingleOptionField =
-  | string
-  | { value?: string; label?: string; name?: string }
-  | undefined;
+import { resolveSingleOption, resolveWidthMode, type StoryblokSingleOptionField } from "../lib/width";
 
 type ContactDetailsBlok = SbBlokData & {
   headline?: string;
@@ -13,22 +9,11 @@ type ContactDetailsBlok = SbBlokData & {
   headline_size?: StoryblokSingleOptionField;
   text_size?: StoryblokSingleOptionField;
   headline_bold?: boolean;
+  container_width?: StoryblokSingleOptionField;
   address?: string;
   phone?: string;
   email?: string;
 };
-
-function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
-  if (!value) {
-    return fallback;
-  }
-
-  if (typeof value === "string") {
-    return value;
-  }
-
-  return value.value || value.label || value.name || fallback;
-}
 
 function resolveHeadlineSize(value: StoryblokSingleOptionField) {
   const size = resolveSingleOption(value, "medium").trim().toLowerCase();
@@ -178,10 +163,11 @@ function ContactItem({ icon, title, content, href }: ContactItemProps) {
 export default function ContactDetails({ blok }: { blok: ContactDetailsBlok }) {
   const headlineSizeStyles = resolveHeadlineSize(blok.headline_size);
   const textSizeStyles = resolveTextSize(blok.text_size);
+  const widthMode = resolveWidthMode(blok.container_width);
 
   return (
     <section {...storyblokEditable(blok)} className="w-full py-4">
-      <div className="sb-contact-details">
+      <div className={["sb-contact-details", widthMode === "full" ? "sb-section-width-full" : ""].join(" ")}>
         <div className="sb-contact-details__intro">
           {blok.headline ? (
             <h2

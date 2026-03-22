@@ -16,6 +16,7 @@
     { "name": "cta_text_color", "type": "color" },
     { "name": "headline_size", "type": "single_option" },
     { "name": "text_size", "type": "single_option" },
+    { "name": "container_width", "type": "single_option" },
     { "name": "image_animation", "type": "single_option" },
     { "name": "image_animation_direction", "type": "single_option" },
     { "name": "image_animation_speed", "type": "single_option" },

@@ -12,6 +12,7 @@ import {
   resolveAnimationType,
   type StoryblokSingleOptionField,
 } from "../lib/animation";
+import { resolveWidthMode } from "../lib/width";
 
 type StoryblokAssetField = {
   filename?: string;
@@ -50,6 +51,7 @@ type HeroBlok = SbBlokData & {
   cta_text_color?: StoryblokColorField | string;
   headline_size?: string;
   text_size?: string;
+  container_width?: StoryblokSingleOptionField;
   image_animation?: StoryblokSingleOptionField;
   image_animation_direction?: StoryblokSingleOptionField;
   image_animation_speed?: StoryblokSingleOptionField;
@@ -180,11 +182,15 @@ export default function Hero({ blok }: { blok: HeroBlok }) {
   const imageAnimationDelay = resolveAnimationDelayMs(blok.image_animation_delay, 120);
   const imageAnimationDistance = resolveAnimationDistance(blok.image_animation_distance, 56);
   const textSizeStyles = resolveTextSize(blok.text_size);
+  const widthMode = resolveWidthMode(blok.container_width);
 
   return (
     <section
       {...storyblokEditable(blok)}
-      className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20"
+      className={[
+        "grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20",
+        widthMode === "full" ? "sb-section-width-full" : "",
+      ].join(" ")}
       style={
         {
           "--hero-background": backgroundColor,
