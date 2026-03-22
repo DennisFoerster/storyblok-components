@@ -82,7 +82,7 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
 
 function PhoneIcon() {
   return (
-    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.35rem", height: "2.35rem" }}>
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.65rem", height: "2.65rem" }}>
       <path
         d="M15.6 9.6c1.2-1.2 3.2-1.2 4.4 0l4.1 4.1c1.2 1.2 1.2 3.2 0 4.4l-2.4 2.4a2 2 0 0 0-.4 2.3c1.5 2.8 3.8 5.1 6.6 6.6a2 2 0 0 0 2.3-.4l2.4-2.4c1.2-1.2 3.2-1.2 4.4 0l4.1 4.1c1.2 1.2 1.2 3.2 0 4.4l-1.9 1.9c-2.1 2.1-5.2 2.9-8 2-6.2-2.1-11.7-7.6-13.8-13.8-.9-2.8-.1-5.9 2-8z"
         stroke="currentColor"
@@ -96,7 +96,7 @@ function PhoneIcon() {
 
 function PinIcon() {
   return (
-    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.35rem", height: "2.35rem" }}>
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.65rem", height: "2.65rem" }}>
       <path
         d="M24 42s10-11 10-19c0-5.5-4.5-10-10-10s-10 4.5-10 10c0 8 10 19 10 19z"
         stroke="currentColor"
@@ -111,7 +111,7 @@ function PinIcon() {
 
 function MailIcon() {
   return (
-    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.35rem", height: "2.35rem" }}>
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.65rem", height: "2.65rem" }}>
       <rect x="9" y="13" width="30" height="22" rx="2.5" stroke="currentColor" strokeWidth="2.4" />
       <path
         d="M11 16l13 11 13-11"
@@ -133,8 +133,8 @@ type ContactItemProps = {
 
 function ContactItem({ icon, title, content, href }: ContactItemProps) {
   const titleStyles: CSSProperties = {
-    fontSize: "clamp(2rem, 3vw, 2.6rem)",
-    lineHeight: 1.02,
+    fontSize: "clamp(1.7rem, 2.45vw, 2.2rem)",
+    lineHeight: 1.05,
     letterSpacing: "-0.03em",
     color: "#3a4f47",
     fontFamily: "var(--font-playfair-display), Georgia, serif",
