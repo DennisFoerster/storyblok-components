@@ -2,6 +2,8 @@ import Image from "next/image";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
 
+import { resolveWidthMode, type StoryblokSingleOptionField } from "../lib/width";
+
 type StoryblokLinkField = {
   cached_url?: string;
   url?: string;
@@ -27,6 +29,7 @@ type NavigationBlok = SbBlokData & {
   logo_label?: string;
   logo_link?: StoryblokLinkField | string;
   logo_width?: number | string;
+  container_width?: StoryblokSingleOptionField;
   items?: NavItemBlok[];
   cta_label?: string;
   cta_link?: StoryblokLinkField | string;
@@ -108,13 +111,19 @@ function resolveLogoDimensions(asset?: StoryblokAssetField, width?: number | str
 export default function Navigation({ blok }: { blok: NavigationBlok }) {
   const logoHref = resolveHref(blok.logo_link, "/");
   const logoDimensions = resolveLogoDimensions(blok.logo, blok.logo_width);
+  const widthMode = resolveWidthMode(blok.container_width);
 
   return (
     <header
       {...storyblokEditable(blok)}
       className="sticky top-0 z-20 w-full border-b border-[rgba(53,88,77,0.08)] bg-[rgba(250,246,239,0.96)]"
     >
-      <div className="storyblok-sections-container grid grid-cols-1 items-center gap-5 py-5 lg:grid-cols-[auto_1fr_auto] lg:gap-10">
+      <div
+        className={[
+          "storyblok-sections-container grid grid-cols-1 items-center gap-5 py-5 lg:grid-cols-[auto_1fr_auto] lg:gap-10",
+          widthMode === "full" ? "storyblok-sections-container--full" : "",
+        ].join(" ")}
+      >
         <a href={logoHref} className="inline-flex items-center gap-3 text-[rgba(41,71,61,1)]">
           {blok.logo?.filename ? (
             <Image

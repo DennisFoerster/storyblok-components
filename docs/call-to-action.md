@@ -68,3 +68,4 @@ Block-Komponente: `call_to_action`
 - `centered` bündelt alles mittig oder entsprechend der gewählten Ausrichtung
 - Primärer und sekundärer Button sind jeweils optional
 - Farben, Breite, Padding und Panel-Stil sind komplett in Storyblok steuerbar
+- `container_width = full` bedeutet echte Browserbreite statt nur volle Breite im Inhaltscontainer

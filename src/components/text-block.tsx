@@ -1,17 +1,14 @@
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
 
+import { resolveWidthMode, resolveSingleOption, type StoryblokSingleOptionField } from "../lib/width";
+
 type StoryblokColorField = {
   value?: string;
   color?: string;
   plugin?: string;
   rgba?: string;
 };
-
-type StoryblokSingleOptionField =
-  | string
-  | { value?: string; label?: string; name?: string }
-  | undefined;
 
 type TextBlockBlok = SbBlokData & {
   headline?: string;
@@ -42,18 +39,6 @@ function resolveColor(
   }
 
   return color.value || color.color || color.rgba || color.plugin || fallback;
-}
-
-function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
-  if (!value) {
-    return fallback;
-  }
-
-  if (typeof value === "string") {
-    return value;
-  }
-
-  return value.value || value.label || value.name || fallback;
 }
 
 function resolveAlignClass(value: StoryblokSingleOptionField) {
@@ -145,7 +130,7 @@ function resolveWidthClass(value: StoryblokSingleOptionField) {
       return { maxWidth: "72rem" };
     case "full":
     case "voll":
-      return { maxWidth: "100%" };
+      return { maxWidth: "100%", fullBleed: true };
     default:
       return { maxWidth: "56rem" };
   }
@@ -208,6 +193,7 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
   const headlineSizeStyles = resolveHeadlineSize(blok.headline_size);
   const textSizeStyles = resolveTextSize(blok.text_size);
   const widthStyles = resolveWidthClass(blok.container_width);
+  const widthMode = resolveWidthMode(blok.container_width);
   const paddingStyles = resolvePaddingClass(blok.padding_size);
   const surfaceClasses = resolveSurfaceClasses(blok.surface_style);
   const hasHeadline = Boolean(blok.headline?.trim());
@@ -219,12 +205,13 @@ export default function TextBlock({ blok }: { blok: TextBlockBlok }) {
     >
       <div
         className={[
-          "mx-auto w-full",
+          "w-full",
+          widthMode === "full" ? "sb-section-width-full" : "mx-auto",
           surfaceClasses,
         ].join(" ")}
         style={{
           backgroundColor,
-          ...widthStyles,
+          ...(widthMode === "full" ? {} : widthStyles),
           ...paddingStyles,
         }}
       >

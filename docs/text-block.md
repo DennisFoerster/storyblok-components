@@ -52,6 +52,7 @@ Die Komponente bleibt bewusst rein textbasiert, bietet aber mehr gestalterische 
 - Breite des Textblocks ist steuerbar
 - Oberfläche kann neutral, weich, kartenartig oder mit feiner Linie gestaltet werden
 - Innenabstände und Hintergrundfarbe sind optional steuerbar
+- `full` bedeutet echte Browserbreite und bricht aus dem Seitencontainer aus
 
 ## Globale Textskala
 

@@ -3,33 +3,19 @@ import Image from "next/image";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
 
+import { resolveWidthMode, resolveSingleOption, type StoryblokSingleOptionField } from "../lib/width";
+
 type StoryblokAssetField = {
   filename?: string;
   alt?: string;
 };
 
-type StoryblokSingleOptionField =
-  | string
-  | { value?: string; label?: string; name?: string }
-  | undefined;
-
 type ImageBlockBlok = SbBlokData & {
   image?: StoryblokAssetField;
   width_percent?: number | string;
   align?: StoryblokSingleOptionField;
+  container_width?: StoryblokSingleOptionField;
 };
-
-function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
-  if (!value) {
-    return fallback;
-  }
-
-  if (typeof value === "string") {
-    return value;
-  }
-
-  return value.value || value.label || value.name || fallback;
-}
 
 function resolveImageDimensions(asset?: StoryblokAssetField) {
   const filename = asset?.filename;
@@ -94,16 +80,18 @@ export default function ImageBlock({ blok }: { blok: ImageBlockBlok }) {
   const imageDimensions = resolveImageDimensions(blok.image);
   const widthPercent = resolveWidthPercent(blok.width_percent);
   const alignmentStyles = resolveAlignmentStyles(blok.align);
+  const widthMode = resolveWidthMode(blok.container_width);
 
   return (
     <section {...storyblokEditable(blok)} className="w-full py-2">
-      <div
-        className="overflow-hidden rounded-[2rem]"
-        style={{
-          width: `${widthPercent}%`,
-          ...alignmentStyles,
-        }}
-      >
+      <div className={widthMode === "full" ? "sb-section-width-full" : "w-full"}>
+        <div
+          className="overflow-hidden rounded-[2rem]"
+          style={{
+            width: `${widthPercent}%`,
+            ...alignmentStyles,
+          }}
+        >
         {blok.image?.filename ? (
           <Image
             src={blok.image.filename}
@@ -113,10 +101,11 @@ export default function ImageBlock({ blok }: { blok: ImageBlockBlok }) {
             className="h-auto w-full object-cover"
           />
         ) : (
-          <div className="flex min-h-[220px] items-center justify-center rounded-[2rem] border border-[rgba(53,88,77,0.12)] bg-[linear-gradient(135deg,rgba(255,255,255,0.68),rgba(240,230,217,0.92))]">
-            <div className="h-[72%] w-[72%] rounded-[1.5rem] border border-white/60 bg-white/35" />
-          </div>
-        )}
+            <div className="flex min-h-[220px] items-center justify-center rounded-[2rem] border border-[rgba(53,88,77,0.12)] bg-[linear-gradient(135deg,rgba(255,255,255,0.68),rgba(240,230,217,0.92))]">
+              <div className="h-[72%] w-[72%] rounded-[1.5rem] border border-white/60 bg-white/35" />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

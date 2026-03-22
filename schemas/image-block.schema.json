@@ -4,6 +4,7 @@
   "fields": [
     { "name": "image", "type": "asset" },
     { "name": "width_percent", "type": "number" },
-    { "name": "align", "type": "single_option" }
+    { "name": "align", "type": "single_option" },
+    { "name": "container_width", "type": "single_option" }
   ]
 }

@@ -2,6 +2,8 @@ import type { CSSProperties } from "react";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
 
+import { resolveWidthMode, resolveSingleOption, type StoryblokSingleOptionField } from "../lib/width";
+
 type StoryblokColorField = {
   value?: string;
   color?: string;
@@ -18,11 +20,6 @@ type StoryblokLinkField = {
     full_slug?: string;
   };
 };
-
-type StoryblokSingleOptionField =
-  | string
-  | { value?: string; label?: string; name?: string }
-  | undefined;
 
 type CallToActionBlok = SbBlokData & {
   eyebrow?: string;
@@ -63,18 +60,6 @@ function resolveColor(
   }
 
   return color.value || color.color || color.rgba || color.plugin || fallback;
-}
-
-function resolveSingleOption(value: StoryblokSingleOptionField, fallback: string) {
-  if (!value) {
-    return fallback;
-  }
-
-  if (typeof value === "string") {
-    return value;
-  }
-
-  return value.value || value.label || value.name || fallback;
 }
 
 function resolveHref(link?: StoryblokLinkField | string, fallback = "#") {
@@ -193,7 +178,7 @@ function resolveWidth(value: StoryblokSingleOptionField) {
       return { maxWidth: "48rem" };
     case "full":
     case "voll":
-      return { maxWidth: "100%" };
+      return { maxWidth: "100%", fullBleed: true };
     default:
       return { maxWidth: "74rem" };
   }
@@ -259,6 +244,7 @@ export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
   const textSizeStyles = resolveTextSize(blok.text_size);
   const paddingStyles = resolvePadding(blok.padding_size);
   const widthStyles = resolveWidth(blok.container_width);
+  const widthMode = resolveWidthMode(blok.container_width);
   const panelStyles = resolvePanelStyle(blok.panel_style);
   const hasPrimaryCta = Boolean(blok.primary_label && blok.primary_link);
   const hasSecondaryCta = Boolean(blok.secondary_label && blok.secondary_link);
@@ -273,12 +259,15 @@ export default function CallToAction({ blok }: { blok: CallToActionBlok }) {
   return (
     <section {...storyblokEditable(blok)} className="w-full py-2">
       <div
-        className="relative mx-auto overflow-hidden rounded-[2.4rem]"
+        className={[
+          "relative overflow-hidden rounded-[2.4rem]",
+          widthMode === "full" ? "sb-section-width-full" : "mx-auto",
+        ].join(" ")}
         style={{
           background:
             "radial-gradient(circle at top left, rgba(255,255,255,0.55), transparent 28%), linear-gradient(145deg, rgba(255,255,255,0.28), transparent 52%), linear-gradient(180deg, transparent, rgba(255,255,255,0.18))",
           backgroundColor,
-          ...widthStyles,
+          ...(widthMode === "full" ? {} : widthStyles),
           ...paddingStyles,
           ...panelStyles,
         }}
