@@ -1,3 +1,4 @@
+import type { CSSProperties, ReactNode } from "react";
 import { storyblokEditable } from "@storyblok/react/rsc";
 import type { SbBlokData } from "@storyblok/react/rsc";
 
@@ -81,7 +82,7 @@ function resolveTextSize(value: StoryblokSingleOptionField) {
 
 function PhoneIcon() {
   return (
-    <svg viewBox="0 0 48 48" className="h-9 w-9" fill="none" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.35rem", height: "2.35rem" }}>
       <path
         d="M15.6 9.6c1.2-1.2 3.2-1.2 4.4 0l4.1 4.1c1.2 1.2 1.2 3.2 0 4.4l-2.4 2.4a2 2 0 0 0-.4 2.3c1.5 2.8 3.8 5.1 6.6 6.6a2 2 0 0 0 2.3-.4l2.4-2.4c1.2-1.2 3.2-1.2 4.4 0l4.1 4.1c1.2 1.2 1.2 3.2 0 4.4l-1.9 1.9c-2.1 2.1-5.2 2.9-8 2-6.2-2.1-11.7-7.6-13.8-13.8-.9-2.8-.1-5.9 2-8z"
         stroke="currentColor"
@@ -95,7 +96,7 @@ function PhoneIcon() {
 
 function PinIcon() {
   return (
-    <svg viewBox="0 0 48 48" className="h-9 w-9" fill="none" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.35rem", height: "2.35rem" }}>
       <path
         d="M24 42s10-11 10-19c0-5.5-4.5-10-10-10s-10 4.5-10 10c0 8 10 19 10 19z"
         stroke="currentColor"
@@ -110,7 +111,7 @@ function PinIcon() {
 
 function MailIcon() {
   return (
-    <svg viewBox="0 0 48 48" className="h-9 w-9" fill="none" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" aria-hidden="true" style={{ width: "2.35rem", height: "2.35rem" }}>
       <rect x="9" y="13" width="30" height="22" rx="2.5" stroke="currentColor" strokeWidth="2.4" />
       <path
         d="M11 16l13 11 13-11"
@@ -124,29 +125,48 @@ function MailIcon() {
 }
 
 type ContactItemProps = {
-  icon: React.ReactNode;
+  icon: ReactNode;
   title: string;
   content: string;
   href?: string;
 };
 
 function ContactItem({ icon, title, content, href }: ContactItemProps) {
+  const titleStyles: CSSProperties = {
+    fontSize: "clamp(2rem, 3vw, 2.6rem)",
+    lineHeight: 1.02,
+    letterSpacing: "-0.03em",
+    color: "#3a4f47",
+    fontFamily: "var(--font-playfair-display), Georgia, serif",
+  };
+
+  const contentStyles: CSSProperties = {
+    marginTop: "0.95rem",
+    whiteSpace: "pre-line",
+    fontSize: "clamp(1.05rem, 1.75vw, 1.25rem)",
+    lineHeight: 1.7,
+    color: "rgba(41,71,61,0.74)",
+  };
+
   return (
-    <div className="grid grid-cols-[5.8rem_minmax(0,1fr)] gap-6">
-      <div className="flex h-[5.8rem] w-[5.8rem] items-center justify-center rounded-full bg-[#bea28a] text-white">
+    <div className="sb-contact-details__item">
+      <div
+        className="sb-contact-details__icon-wrap"
+        style={{
+          backgroundColor: "#c2a48a",
+          color: "#ffffff",
+        }}
+      >
         {icon}
       </div>
-      <div className="min-w-0 pt-1">
-        <h3 className="text-[2rem] leading-[1.02] tracking-[-0.03em] text-[rgba(57,61,58,1)]">{title}</h3>
+      <div className="sb-contact-details__item-copy">
+        <h3 style={titleStyles}>{title}</h3>
         {href ? (
-          <a
-            href={href}
-            className="mt-3 block whitespace-pre-line text-[1.1rem] leading-8 text-[rgba(99,103,105,1)] underline decoration-[rgba(99,103,105,0.45)] underline-offset-[0.24em]"
-          >
+          <a href={href} style={{ ...contentStyles, display: "block", textDecorationColor: "rgba(41,71,61,0.42)", textUnderlineOffset: "0.24em" }}>
             {content}
           </a>
         ) : (
-          <div className="mt-3 whitespace-pre-line text-[1.1rem] leading-8 text-[rgba(99,103,105,1)]">
+          <div style={contentStyles}>
             {content}
           </div>
         )}
@@ -161,12 +181,13 @@ export default function ContactDetails({ blok }: { blok: ContactDetailsBlok }) {
 
   return (
     <section {...storyblokEditable(blok)} className="w-full py-4">
-      <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(18rem,0.98fr)] lg:gap-16">
-        <div className="max-w-4xl">
+      <div className="sb-contact-details">
+        <div className="sb-contact-details__intro">
           {blok.headline ? (
             <h2
-              className="font-display tracking-[-0.04em] text-[rgba(57,61,58,1)]"
+              className="font-display tracking-[-0.04em]"
               style={{
+                color: "#35584d",
                 fontSize: headlineSizeStyles.fontSize,
                 lineHeight: headlineSizeStyles.lineHeight,
                 fontWeight: blok.headline_bold ? 700 : 400,
@@ -177,8 +198,9 @@ export default function ContactDetails({ blok }: { blok: ContactDetailsBlok }) {
           ) : null}
 
           <div
-            className={blok.headline ? "mt-8 whitespace-pre-line text-[rgba(107,111,114,1)]" : "whitespace-pre-line text-[rgba(107,111,114,1)]"}
+            className={blok.headline ? "mt-8 whitespace-pre-line" : "whitespace-pre-line"}
             style={{
+              color: "rgba(41,71,61,0.82)",
               fontSize: textSizeStyles.fontSize,
               lineHeight: textSizeStyles.lineHeight,
             }}
@@ -187,7 +209,7 @@ export default function ContactDetails({ blok }: { blok: ContactDetailsBlok }) {
           </div>
         </div>
 
-        <div className="space-y-10">
+        <div className="sb-contact-details__list">
           <ContactItem
             icon={<PinIcon />}
             title="Adresse"
